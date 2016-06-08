@@ -1,8 +1,8 @@
 all:
-	gcc -g -c lab2.c -o lab2
+	gcc -g lab2.c -o lab2
 
 checkmem:lab2.c
-	gcc -g -c lab2.c -o lab2
+	gcc -g lab2.c -o lab2
 	valgrind ./lab2
 
 defuseTheBomb:defuseMe.o bomb.o hidden.o
