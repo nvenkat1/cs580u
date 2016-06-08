@@ -1,3 +1,9 @@
+all:
+	gcc -g -c lab2.c -o lab2
+
+checkmem:lab2.c
+	gcc -g -c lab2.c -o lab2
+	valgrind ./lab2
 
 defuseTheBomb:defuseMe.o bomb.o hidden.o
 	gcc defuseMe.o bomb.o hidden.o -o defuseTheBomb
@@ -7,3 +13,6 @@ defuseMe.o:defuseMe.c
 
 bomb.o:bomb.c
 	gcc -g -c bomb.c -o bomb.o
+
+clean:
+	rm *.o lab2 defuseTheBomb
