@@ -1,13 +1,26 @@
 #include<stdio.h>
 #include<limits.h>
 
-void calculateBinaryMask(int number){
-	unsigned int mask = 2147483648; //this is 1000 0000 0000 0000 0000 0000 0000 0000 for 32-bit machine. 
-	printf("Unsigned int mask = %u",mask);
-	//we start with anding given number with mask value
-	//Now mask value has only MSB bit as 1.
-	//Hence adding with any number's MSB value will show us that,
-	//given number is positive or negative
+int calMaskValue(){
+	//unsigned int mask = 2147483648; //this is 1000 0000 0000 0000 0000 0000 0000 0000 for 32-bit machine. 
+	int totalBits = 8 * sizeof(int), j=0;
+	unsigned int mask = 1;
+
+	for(j=0; j< (totalBits-1) ; j++)
+	mask = mask << 1;
+	mask = ~mask;
+	printf("Value of 8* sizeof(int) = %d\n", totalBits);
+	printf("Calculated mask is = %d\n", mask);
+	return mask;
+}
+
+//we start with anding given number with mask value
+//Now mask value has only MSB bit as 1.
+//Hence adding with any number's MSB value will show us that,
+//given number is positive or negative
+
+void calculateBinaryMask(int number, int mask){
+
 	printf("Binary Representation of %d:\n",number);
 	while(mask>0){
 		if((number & mask)==0){	//Checking each bit , bit by bit
@@ -59,25 +72,25 @@ void calculateBinary(int number){
 }
 
 int main(){
-	int a = 8;
+	//int a = 8;
 	//printf("Size of int=%x bytes\n",sizeof(int));
-	//size of int is 4 byes = 32 bits.
-	//int mask = 2147483648; //this is 1000 0000 0000 0000 0000 0000 0000 0000 for 32-bit machine. 
-
+	int mask = calMaskValue();
 	int array[6] = {2,255,32,-1,INT_MAX,INT_MIN},i=0;
 
 	//###Testing printing array####
-	//for(i=0;i<6;i++){
-	//	printf("Array[%d] = %u\n",i+1, *(array+i));
-	//}
+	/*
+	for(i=0;i<6;i++){
+		printf("Array[%d] = %u\n",i+1, *(array+i));
+	}
 
 	for(i=0;i<6;i++){
 		calculateBinary(array[i]);
 	}
 	printf("\n\n");
+	*/
 
 	for(i=0;i<6;i++){
-		calculateBinaryMask(array[i]);
+		calculateBinaryMask(array[i], mask);
 	}
 return 0;
 
