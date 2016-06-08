@@ -25,8 +25,8 @@ int calMaskValue(){
         //mask = ~mask;
         //mask = mask + 1;
 
-        printf("Total bits in your machine for int =  (8 * sizeof(int)) = %d bits\n", totalBits);
-        printf("Calculated mask is = %d\n", mask);
+        printf("\tTotal bits in your machine for int =  (8 * sizeof(int)) = %d bits\n", totalBits);
+        printf("\tCalculated mask is = %d\n", mask);
         return mask;
 
 }
@@ -38,7 +38,7 @@ int calMaskValue(){
 
 void calBinaryUsingBitwise(int number,unsigned int mask){
 
-        printf("Binary Representation of %d:\n",number);
+        printf("\tBinary Representation of %d:\n\t",number);
 	int counterForAddingSpace = 0;
         while(mask>0){
                 if((number & mask)==0){ //Checking each bit , bit by bit
@@ -56,7 +56,7 @@ void calBinaryUsingBitwise(int number,unsigned int mask){
 }
 int main(){
 	//Part A: Binary Printer
-	printf("___________PartA__________\n");
+	printf("\n\n\t___________PartA__________\n");
         unsigned int mask = calMaskValue();
         signed int array[6] = {2, 255, 32, -1, INT_MAX, INT_MIN};
         int i = 0;
@@ -66,14 +66,15 @@ int main(){
         }
 
 	//Part B: Printing A Random Binary Value
-	printf("___________PartB__________\n");
+	printf("\n\n\t___________PartB__________\n");
 	/* initialize random seed: */
   	srand (time(NULL));
 
 	/* generate secret number between maximum integer number on machine and minimum int on machine: */
 	int iSecret = rand() % INT_MAX + INT_MIN;
-	printf("Generating Random Number: %d\n",iSecret);
+	printf("\tGenerating Random Number: %d\n",iSecret);
 	calBinaryUsingBitwise(iSecret, mask);
+	printf("\n\n");
 return 0;
 
 }
