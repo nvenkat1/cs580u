@@ -1,0 +1,24 @@
+#include<stdio.h>
+
+int main(){
+	//try1
+	char buf[51] = {0};
+	FILE * fptr = fopen("ex4.c", "r");
+	fscanf(fptr, "%s", &buf);
+	printf("%s\n", buf);
+	fscanf(fptr, "%s", &buf);
+	printf("%s\n", buf);
+
+	//try2 : flush the buffer using fclose();
+	char buf[51] = {0};
+	FILE * fptr = fopen("ex4.c", "r");
+	fscanf(fptr, "%s", &buf);
+	fprintf(fptr,"%s\n", buf);
+	fscanf(fptr, "%s", &buf);
+	fprintf(fptr, "%s\n", buf);
+	int * x = 0;
+	*x;
+	//solution:fclose();
+
+return 0;
+}
