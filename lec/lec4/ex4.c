@@ -41,5 +41,9 @@ int main(){
 	fprintf(fptr, "%s\n", buf);
 	fseek(fptr, -3, SEEK_SET);
 
+	//we have SEEK_SET = start position 
+	// SEEK_CUR = current position
+	// SEEK_END = end position.
+
 return 0;
 }
