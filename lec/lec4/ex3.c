@@ -8,6 +8,8 @@ int main(){
 	printf("\tEnter your \n\t1. Name\n\t2.Age\n\t");
 	scanf("%50s %d", name, &age);	//doing in one line. add space inbetween %s and %d cool!!
 
+	printf("%s, %d\n", name, age);
+
 	//try2 : problem of flushing input!!
 	printf("\nEnter name and age\n");
 	scanf("%50s", name);

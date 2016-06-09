@@ -20,5 +20,26 @@ int main(){
 	*x;
 	//solution:fclose();
 
+	//try 3
+	char buf[51] = {0};
+	FILE * fptr = fopen("ex4.c", "r");
+	fgets(buf, 50 , fptr);
+	fscanf(fptr, "%s", &buf);
+	fprintf(fptr,"%s\n", buf);
+	fscanf(fptr, "%s", &buf);
+	fprintf(fptr, "%s\n", buf);
+	
+	solution:fclose();
+
+	//try 4: use of fseek()
+	char buf[51] = {0};
+	FILE * fptr = fopen("ex4.c", "r");
+	fgets(buf, 50 , fptr);
+	fscanf(fptr, "%s", &buf);
+	fprintf(fptr,"%s\n", buf);
+	fscanf(fptr, "%s", &buf);
+	fprintf(fptr, "%s\n", buf);
+	fseek(fptr, -3, SEEK_SET);
+
 return 0;
 }

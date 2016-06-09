@@ -17,7 +17,7 @@ int main(){
 	fscanf(fptr, "%s", &buf);
 	fprintf(fptr, "%s\n", buf);
 	int * x = 0;
-	*x;
+	//*x;
 	//solution:fclose();
 
 	//try 3
@@ -28,7 +28,7 @@ int main(){
 	fprintf(fptr,"%s\n", buf);
 	fscanf(fptr, "%s", &buf);
 	fprintf(fptr, "%s\n", buf);
-	
+
 	solution:fclose();
 
 	//try 4: use of fseek()
