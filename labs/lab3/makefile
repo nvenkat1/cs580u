@@ -13,5 +13,9 @@ checkmem:lab3.c
 run:lab3.c
 	gcc lab3.c -o lab3
 	./lab3
+
+debug:
+	gcc -g lab3.c -o lab3
+	gdb lab3
 clean:
 	rm *.o lab3
