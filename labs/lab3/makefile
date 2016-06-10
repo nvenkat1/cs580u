@@ -8,7 +8,7 @@ lab3.o:lab3.c
 
 checkmem:lab3.c
 	gcc -g lab3.c -o lab3
-	valgrind ./lab3
+	valgrind --tool=memcheck --leak-check=full --show-reachable=yes ./lab3
 
 run:lab3.c
 	gcc lab3.c -o lab3

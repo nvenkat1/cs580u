@@ -149,6 +149,7 @@ int main(){
 		memset(firstName, 0, 20);
 		memset(lastName, 0, 20);
 	}
+	fclose(fptr);
 #endif//PART2B
 	return 0;
 }
