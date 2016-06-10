@@ -136,6 +136,7 @@ int main(){
 	//fscanf(fptr,"%s", buffer);
 	//printf("%s\n",buffer);
 #endif
+	i = 1;
 	while(fscanf(fptr, "%s", buffer)!=EOF){
 		splitString(firstName, lastName, buffer);
 #if DEBUG
@@ -143,8 +144,10 @@ int main(){
 #endif
 		memset(buffer, 0, 50);
 		findJediName(firstName, lastName, buffer);
-		if(buffer[0]!='\0')
-			printf("\t|First:%-15s\t|Last:%-15s\t|JediName:%-5s\n",firstName, lastName, buffer);
+		if(buffer[0]!='\0'){
+			printf("\t|%02d|First:%-15s\t|Last:%-15s\t|JediName:%-5s\n",i,firstName, lastName, buffer);
+			i++;
+		}
 		memset(buffer, 0, 50);
 		memset(firstName, 0, 20);
 		memset(lastName, 0, 20);
