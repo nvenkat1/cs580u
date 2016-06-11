@@ -5,7 +5,7 @@ $(P):$(P).o
 	gcc $(P).o -o $(P)
 
 $(P).o:$(P).c
-	gcc -c -Wcast-align -Wall $(P).c
+	gcc -c -Wall $(P).c
 
 m:$(P).c
 	gcc -g $(P).c -o $(P)
