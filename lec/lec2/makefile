@@ -1,5 +1,23 @@
-P=test
+P=ex1
 all:$(P)
 
-$(P):
-	gcc -g $(P)1.c
+$(P):$(P).o
+	gcc $(P).o -o $(P)
+
+$(P).o:$(P).c
+	gcc -c -Wcast-align -Wall $(P).c
+
+m:$(P).c
+	gcc -g $(P).c -o $(P)
+	valgrind --tool=memcheck --leak-check=full --show-rechable=yes --track-origins=yes ./$(P)
+
+r:$(P).c
+	gcc $(P).c -o $(P)
+	./$(P)
+
+d:
+	gcc -g $(P).c -o $(P)
+	gdb $(P)
+
+c:
+	rm *.o $(P)
