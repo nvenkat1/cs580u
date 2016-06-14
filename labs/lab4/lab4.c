@@ -1,6 +1,27 @@
 #include "tournament.h"
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
+
+char * generateTeamName(char *teamName, int num){
+
+	char numString[2];
+	sprintf(numString, "%d", num);
+
+	char *combinedString = malloc(strlen(teamName)+strlen(numString)+1);
+	combinedString[0] = '\0';
+
+	strcat(combinedString,teamName);
+	strcat(combinedString,numString);
+
+#ifdef DEBUG_A1
+	printf("In generateTeamName : teamName = %s\t %d\n ",teamName, strlen(teamName));
+	printf("numString = %s\t length=%d\n", numString , strlen(numString));
+	printf("TempString = %s\t length=%d\n", combinedString , strlen(combinedString));
+#endif
+	return combinedString;
+}
+
 
 int main(){
 
@@ -17,10 +38,17 @@ int main(){
 #endif
 
 	Team *league[8];
-	char teamName1 = "Team";
+	char teamName1[] = "Team";
+	char *teamName2 = generateTeamName("India",5);
 	for(i=0; i<8 ; i++){
-		league[i] = initTeam("Team");
+		league[i] = initTeam(generateTeamName("Team",i+1));
 	}
+
+#if DEBUG_A1
+	for(i = 0 ; i<8 ; i++){
+		printf("Team%d = %s\n", i+1, (*(*(league + i))).teamName);
+	}
+#endif
 
 #endif
 
