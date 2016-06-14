@@ -20,3 +20,30 @@ Team* initTeam(char * name){
         }
 	return team;
 }
+
+Team * game(Team * A, Team * B){
+	int score = 0, scoreA = 0, scoreB = 0, i = 0;
+	//for 10 rounds
+	for( i = 0; i < 10; i++){
+		score = calTotalDefenseOffence(A,1) + calTotalDefenseOffence(B,2);
+	}
+
+}
+
+int calTotalDefenseOffence(Team* team, int rank){
+#if DEBUG_A1
+		printf("In CalOFF_DEF number of players = %d\n", sizeof((*team).players)/sizeof(Player));
+#endif
+	int totalScore = 0, i = 0;
+	if(rank == 1){//Defensive team
+		for( i = 0; i< sizeof((*team).players)/sizeof(Player); i++)
+			totalScore += (*team).players[i].defensive;
+	}else if( rank == 2){//Offensive team
+		for( i = 0; i< sizeof((*team).players)/sizeof(Player); i++)
+			totalScore += (*team).players[i].offensive;
+	}
+#if DEBUG_A1
+	printf("Total Score %d\n", totalScore);
+#endif
+	return totalScore;
+}

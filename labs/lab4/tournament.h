@@ -18,5 +18,6 @@ typedef struct team{
 }Team;
 
 Team* initTeam(char *name);
-
+Team* game(Team*, Team*);
+int calTotalDefenseOffence(Team *, int);
 #endif
