@@ -1,0 +1,35 @@
+#include "tournament.h"
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(){
+
+#if PARTA1
+	Team * team1 = initTeam("India");
+
+/*
+        printf("%d %d\n", rand1, rand2);
+	Player *player1 = (Player *) malloc(sizeof(Player));
+	(*player1).offensive = 1;
+	printf("%d\n",player1->offensive);
+
+	Team *team1 = (Team *)malloc(sizeof(Team));
+	(*team1).teamName = "India";
+	int i = 0;
+	for(i = 0; i < 10; i++){
+		team1->Player[i].offensive = 1;
+		team1->Player[i].defensive = 2;
+	}
+
+	printf("%s\n",(*team1).teamName);
+	for(i = 0; i< 10; i++){
+		printf("Offensive: %d\t", team1->Player[i].offensive);
+		printf("Defensive: %d\n", team1->Player[i].defensive);
+	}
+*/
+#endif
+
+
+return 0;
+}

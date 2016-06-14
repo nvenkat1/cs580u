@@ -1,0 +1,14 @@
+#ifndef TOURNAMENT_H
+#define TOURNAMENT_H
+
+typedef struct player{
+	int offensive, defensive;
+}Player;
+
+typedef struct team{
+	char *teamName;
+	Player players[10];
+}Team;
+
+Team * initTeam();
+#endif
