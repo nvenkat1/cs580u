@@ -4,8 +4,8 @@
 #define PART_A1 1
 #define PART_A2 1
 
-#define DEBUG_A1 1
-#define DEBUG_A2 1
+#define DEBUG_A1 0
+#define DEBUG_A2 0
 
 typedef struct player{
 	int offensive;

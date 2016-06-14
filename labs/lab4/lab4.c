@@ -14,7 +14,7 @@ char * generateTeamName(char *teamName, int num){
 	strcat(combinedString,teamName);
 	strcat(combinedString,numString);
 
-#ifdef DEBUG_A1
+#if DEBUG_A1
 	printf("In generateTeamName : teamName = %s\t %d\n ",teamName, strlen(teamName));
 	printf("numString = %s\t length=%d\n", numString , strlen(numString));
 	printf("TempString = %s\t length=%d\n", combinedString , strlen(combinedString));
@@ -27,9 +27,9 @@ int main(){
 
 #if PART_A1
 	Team * team1 = initTeam("India");
+	int i = 0;
 
 #if DEBUG_A1
-	int i = 0;
 	printf("In Main : Team Name = %s\n",(*team1).teamName);
         for(i = 0; i< 10; i++){
                 printf("Offensive: %d\t", team1->players[i].offensive);
