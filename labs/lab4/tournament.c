@@ -54,10 +54,10 @@ Team * game(Team * A, Team * B){
 	}//end for
 
 	if(scoreB > scoreA){
-		printf("\tOffensive %s Won!!\nWith Total score of: %d\n", (*B).teamName, scoreB);
+		printf("\tOffensive %s Won!!\n\tWith Total score of: %d\n\n", (*B).teamName, scoreB);
 		return B;
 	}else if(scoreA > scoreB){
-		printf("\tDefensive %s Won!!\nWith Total score of: %d\n", (*A).teamName, scoreA);
+		printf("\tDefensive %s Won!!\n\tWith Total score of: %d\n\n", (*A).teamName, scoreA);
 		return A;
 	}else{
 		printf("\tMatch was Tied\n");
@@ -68,11 +68,11 @@ Team * game(Team * A, Team * B){
 		printf("\tPenalty Shoot out!!\n");
 		if( (rand()%2 +1)%2 == 0){
 			printf("\tOffensive %s Scored!\n, Hence Winner!\n", (*B).teamName);
-			printf("\tWith Final Score = %d\n", scoreB + 1);
+			printf("\tWith Final Score = %d\n\n", scoreB + 1);
 			return B;
 		}else{
 			printf("\tDefensive %s Scored!\n, Hence Winner!\n", (*A).teamName);
-                        printf("\tWith Final Score = %d\n", scoreA + 1);
+                        printf("\tWith Final Score = %d\n\n", scoreA + 1);
 			return A;
 		}
 	}
@@ -97,4 +97,32 @@ int calTotalDefenseOffence(Team* team, int rank){
 	printf("\tTotal Score %d\n", totalScore);
 #endif
 	return totalScore;
+}
+
+Team* tournament(Team * league[]){
+	int i = 0;
+	Team * champion,* winner1_2, *winner3_4, *winner5_6, *winner7_8, *winner12_34, *winner56_78;
+
+	for( i = 0; i < 3 ; i++){
+		if(i==0){
+			printf("\tRound1:\n");
+			winner1_2 = game(league[i], league[i+1]);
+			winner3_4 = game(league[i+2], league[i+3]);
+			winner5_6 = game(league[i+4], league[i+5]);
+			winner7_8 = game(league[i+6], league[i+7]);
+			printf("\tWinners of First round are:\n\t%s\t%s\t%s\t%s\n\n",(*winner1_2).teamName,(*winner3_4).teamName,(*winner5_6).teamName,(*winner7_8).teamName);
+		}else if(i==1){
+			printf("\tRound2:\n");
+			winner12_34 = game(winner1_2, winner3_4);
+			winner56_78 = game(winner5_6, winner7_8);
+			printf("\tWinners of Second round are:\n\t%s\t%s\n\n",(*winner12_34).teamName,(*winner56_78).teamName);
+		}else if(i==2){
+			printf("\tFinal Match:\n");
+			champion = game(winner12_34, winner56_78);
+		}
+	//printf("\tCongratualation,\n\tChampion for this year are team of,%s\n",(*champion).teamName); 
+
+	}
+
+	return champion;
 }

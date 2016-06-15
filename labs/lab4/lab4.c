@@ -38,8 +38,8 @@ int main(){
 #endif
 
 	Team *league[8];
-	char teamName1[] = "Team";
-	char *teamName2 = generateTeamName("India",5);
+	//char teamName1[] = "Team";
+	//char *teamName2 = generateTeamName("India",5);
 	for(i=0; i<8 ; i++){
 		league[i] = initTeam(generateTeamName("Team",i+1));
 	}
@@ -49,20 +49,19 @@ int main(){
 		printf("Team%d = %s\n", i+1, (*(*(league + i))).teamName);
 	}
 #endif
-	//Round 1: 1 vs 2 | 3 vs 4 |  5 vs 6 | 7 vs 8
-	Team * Winner1_2 = game(league[0], league[1]);
-	//Team * Winner3_4 = game(league[2], league[3]);
-	//Team * Winner5_6 = game(league[4], league[5]);
-	//Team * Winner7_8 = game(league[6], league[7]);
 
-	//Round 2: Winner1_2 vs Winner3_4 | Winner5_6 vs Winner7_8
-	//Team * Winner12_34 = game(Winner1_2, Winner3_4);
-	//Team * Winner56_78 = game(Winner5_6, Winner7_8);
+#endif 	//Part A ends!
 
-	//Final: Winner12_34 vs Winner56_78
-	//Team * Winner = game(Winner12_34, Winner56_78);
+#if PART_B
+	//Part B:
+	Team * champion = tournament(league);
+	printf("\tCongratualation!!,\n\tChampion for this year are team of,%s\n",(*champion).teamName);
+
+#endif	//Part B ends here!
+
+#if PART_C
+
 #endif
-
 
 return 0;
 }

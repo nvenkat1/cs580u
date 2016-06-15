@@ -3,9 +3,13 @@
 
 #define PART_A1 1
 #define PART_A2 1
+#define PART_B 1
+#define PART_C 1
 
 #define DEBUG_A1 0
 #define DEBUG_A2 0
+#define DEBUG_B 1
+#define DEBUG_C 1
 
 typedef struct player{
 	int offensive;
@@ -20,4 +24,5 @@ typedef struct team{
 Team* initTeam(char *name);
 Team* game(Team*, Team*);
 int calTotalDefenseOffence(Team *, int);
+Team * tournament(Team *league[]);
 #endif
