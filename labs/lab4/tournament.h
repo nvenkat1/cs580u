@@ -8,7 +8,7 @@
 
 #define DEBUG_A1 0
 #define DEBUG_A2 0
-#define DEBUG_B 1
+#define DEBUG_B 0
 #define DEBUG_C 1
 
 typedef struct player{
@@ -27,5 +27,5 @@ int calTotalDefenseOffence(Team *, int);
 Team * tournament(Team *league[]);
 Team * checkUpdatedScore(Team *, Team *, int ,  int , int );
 void * deleteTeam(Team *);
-void * deleteLeague(Team **);
+void deleteLeague(Team **);
 #endif

@@ -197,12 +197,13 @@ void * deleteTeam(Team *A){
 	return NULL;
 }
 
-void * deleteLeague(Team **league){
+void deleteLeague(Team **league){
 	int i = 0;
-	for(i = 0; i< 8; i++){
+	for(i = 0; i< 8; i++){ //deleting teamName malloc
 		free( (*(*(league + i))).teamName);
-		free( (*leauge + i));
 	}
-	free(league);
-	return NULL;
+	for( i =0; i< 8 ; i++)//deleting leage teams malloc
+		free (*(league + i));
+	//free(league);
+	//return NULL;
 }
