@@ -25,4 +25,7 @@ Team* initTeam(char *name);
 Team* game(Team*, Team*);
 int calTotalDefenseOffence(Team *, int);
 Team * tournament(Team *league[]);
+Team * checkUpdatedScore(Team *, Team *, int ,  int , int );
+void * deleteTeam(Team *);
+void * deleteLeague(Team **);
 #endif

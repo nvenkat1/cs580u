@@ -60,6 +60,12 @@ int main(){
 #endif	//Part B ends here!
 
 #if PART_C
+	//Part C:Handicap mechanism
+	team1 = deleteTeam(team1);
+	team1 = NULL;
+
+	league = deleteLeague(league);
+	league = NULL;
 
 #endif
 

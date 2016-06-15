@@ -17,7 +17,7 @@ r:$(P).c tournament.c
 
 m:$(P).c tournament.c
 	gcc -g $(P).c tournament.c -o $(P)
-	valgrind --leak-check=full --show-reachable=yes --tack-origins=yes ./$(P)
+	valgrind --leak-check=full --show-reachable=yes --track-origins=yes ./$(P)
 
 d:$(P).c
 	gcc -g $(P).c tournament.c -o $(P)
