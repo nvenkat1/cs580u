@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
+#include<errno.h>
 
 Vector * createVector(){
 	Vector *v = malloc(sizeof(Vector));		//TODO: Dealloacte this
@@ -39,6 +40,8 @@ void vectorInsert(Vector *v, int index, Data data){
 }
 
 Data* vectorRead(Vector *v, int index){
+	if(index < 0) 
+		fprintf(stderr, "Invalid Index\n");
 	if(index >= (*v).current_size){
 		return NULL;
 	}
@@ -66,15 +69,36 @@ void vectorRemove(Vector *v, int index){
 #if DEBUG_1
 	printf(" current size\n %d\n", (*v).current_size);
 #endif
-
-	//if( (*v).current_size == 0){
-	//	free((*v).data);
-	//	free(v);
-	//}
-
 }
+
 void * deleteVector(Vector *v){
 	free((*v).data);
 	free(v);
 	return NULL;
 }
+
+void vectorInsert2(Vector *v, int index, Data data){
+
+        if(index >= (*v).capacity){
+                if((*v).capacity == 0){
+                        (*v).capacity = 1;
+                }
+                (*v).capacity = (*v).capacity + 1;
+                Data *newData = malloc(sizeof(Data) * (*v).capacity);
+                //memcpy( newData, '\0', sizeof(Data) * (*v).current_size);
+                //Step 1 : Copy all element from old data location to new data location.
+                memcpy( newData, (*v).data, sizeof(Data) * (*v).current_size);
+                //Step 2 : Free old data pointer
+                //for first time, (*v).data would be null, but still we can call free on NULL. Its a nop
+                free((*v).data);
+                //Step 3 : Assign Newdata with new size's memory loation to old data pointer of struct vector
+                (*v).data =  newData;
+        }else if( index < (*v).current_size){
+                (*v).current_size = index + 1;
+        }else{
+                //(*v).current_size++;
+        }
+	v->data[index] = data;
+        (*v).current_size = index+  1;
+}
+
