@@ -89,5 +89,12 @@ int main(){
 		printVector(vector2);
 	}
 
+	vector2 = deleteVector(vector2);
+
+	//if( (*v).current_size == 0){
+        //        free((*vector2).data);
+        //        free(vector2);
+        //}
+
 	return 0;
 }

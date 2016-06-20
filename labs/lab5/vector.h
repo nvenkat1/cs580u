@@ -14,6 +14,6 @@ Vector * createVector();
 void vectorInsert(Vector * array, int index, Data value);
 Data * vectorRead(Vector * array, int index);
 void vectorRemove(Vector * array, int index);
-//void * deleteVector(Vector *);
+void * deleteVector(Vector *);
 
 #endif

@@ -67,4 +67,14 @@ void vectorRemove(Vector *v, int index){
 	printf(" current size\n %d\n", (*v).current_size);
 #endif
 
+	//if( (*v).current_size == 0){
+	//	free((*v).data);
+	//	free(v);
+	//}
+
+}
+void * deleteVector(Vector *v){
+	free((*v).data);
+	free(v);
+	return NULL;
 }
