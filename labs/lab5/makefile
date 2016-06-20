@@ -2,13 +2,13 @@ P=lab5
 
 all:$(P)
 
-$(P):$(P).o vector.o
-	gcc -g $(P).o vector.o -o $(P)
+$(P):$(P).o vector.o 
+	gcc -g $(P).o vector.o  -o $(P)
 
-$(P).o:$(P).c vector.h
+$(P).o:$(P).c vector.h data.h
 	gcc -g -c $(P).c
 
-vector.o:vector.c vector.h
+vector.o:vector.c vector.h data.h
 	gcc -g -c vector.c
 
 r:$(P).c vector.c
