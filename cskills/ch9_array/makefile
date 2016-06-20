@@ -1,4 +1,4 @@
-P=ex9
+P=reverse
 
 all:$(P)
 

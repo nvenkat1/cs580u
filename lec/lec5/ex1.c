@@ -15,7 +15,7 @@ int main(){
 	int * intptr = &i; char * charptr = &c; float * floatptr = &f; double * doubleptr=&d;
 
 	void * ptr ;					//its pure memory
-	printf(" value of void * ptr = %d\n", ptr);	//prints zero its
+	printf(" value of void  ptr = %d | Size of ptr = %d\n", ptr, sizeof(ptr));	//prints zero its
 	printf(" *Iptr = %-10d Iptr =%-12p\n", *intptr, intptr);	//prints zero its
 	printf(" *Cptr = %-10c Cptr =%-12p\n", *charptr, charptr);	//prints zero its
 	printf(" *Fptr = %-10f Fptr =%-12p\n", *floatptr, floatptr);	//prints zero its
@@ -26,14 +26,14 @@ int main(){
 	//2
 	int x;
 	void * ptr1 = &x;
-	printf("%d",ptr);	//prints zero its
+	printf("%d", ptr1);	//prints zero
 #endif
 
 #if P3
 	//3
 	int x1;
-	void  * ptr =  &x;	//change void to int
-	int y1 = x + 1;		//wont work! because it will change address with void pointer
+	void  * ptr =  &x1;	//change void to int
+	int y1 = x1 + 1;		//wont work! because it will change address with void pointer
 	int  * y = ptr + 1;
 	printf("%d", y);
 #endif
@@ -43,8 +43,8 @@ int main(){
 	int x2;
 	void * ptr2 = &x;
 	void y2 = ptr2; 	// its working b/c auto casting is happening begind the scene.
-	void *y = ptr + 1;	//this should give error as we dont know how much to add, as its void type
-	printf("%d \t %d", ptr, y);	//even if we change it to int, it will still treating it as interger and printing value  of charcater.
+	void *y = ptr2 + 1;	//this should give error as we dont know how much to add, as its void type
+	printf("%d \t %d", ptr2, y);	//even if we change it to int, it will still treating it as interger and printing value  of charcater.
 #endif
 
 

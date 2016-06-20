@@ -12,7 +12,7 @@ Team* initTeam(char * name){
 #endif
 	(*team).teamName =  malloc(strlen(name)+1);
 	strcpy((*team).teamName, name);
-	srand (time(NULL));
+	//srand (time(NULL));
         int i = 0;
         for(i = 0; i < 10; i++){
                 team->players[i].offensive =  rand() % 10 + 1; // 1 to 10 rand numbers
@@ -24,7 +24,7 @@ Team* initTeam(char * name){
 Team * game(Team * A, Team * B){
 	printf("\t----<%s vs %s>----\n", (*A).teamName, (*B).teamName);
 	int score = 0, scoreA = 0, scoreB = 0, i = 0, matchTied = 0, isHandicap = 0;
-		srand (time(NULL));
+	//srand (time(NULL));
 
 	//for 10 rounds
 	for( i = 0; i < 10; i++){
@@ -63,7 +63,7 @@ Team * game(Team * A, Team * B){
 
 	if(scoreB > scoreA){
 		printf("\tOffensive %s Won!!\n\tWith Total score of: %d\n", (*B).teamName, scoreB);
-		srand (time(NULL));
+		//srand (time(NULL));
 		int randHandi = (rand()%10 + 1);
 #if DEBUG_A2
 		printf("randHandi= %d\n", randHandi);
@@ -79,7 +79,7 @@ Team * game(Team * A, Team * B){
 		return B;
 	}else if(scoreA > scoreB){
 		printf("\tDefensive %s Won!!\n\tWith Total score of: %d\n\n", (*A).teamName, scoreA);
-		srand (time(NULL));
+		//srand (time(NULL));
                 int randHandi = (rand()% 10 + 1);
 #if DEBUG_A2
                 printf("randHandi= %d\n", randHandi);
@@ -101,11 +101,11 @@ Team * game(Team * A, Team * B){
 	if(matchTied){
 		printf("\tPenalty Shoot out!!\n");
 		if( (rand()%2 +1)%2 == 0){
-			printf("\tOffensive %s Scored!\n, Hence Winner!\n", (*B).teamName);
+			printf("\tOffensive %s Scored!  Hence Winner is %s!\n", (*B).teamName, (*B).teamName);
 			printf("\tWith Final Score = %d\n\n", scoreB + 1);
 			return B;
 		}else{
-			printf("\tDefensive %s Scored!\n, Hence Winner!\n", (*A).teamName);
+			printf("\tDefensive %s Scored!  Hence Winner is %s!\n", (*A).teamName, (*A).teamName);
                         printf("\tWith Final Score = %d\n\n", scoreA + 1);
 			return A;
 		}
@@ -144,19 +144,19 @@ Team* tournament(Team * league[]){
 
 	for( i = 0; i < 3 ; i++){
 		if(i==0){
-			printf("\tRound1:\n");
+			printf("\t####<Round1>####\n");
 			winner1_2 = game(league[i], league[i+1]);
 			winner3_4 = game(league[i+2], league[i+3]);
 			winner5_6 = game(league[i+4], league[i+5]);
 			winner7_8 = game(league[i+6], league[i+7]);
 			printf("\tWinners of First round are:\n\t%s\t%s\t%s\t%s\n\n",(*winner1_2).teamName,(*winner3_4).teamName,(*winner5_6).teamName,(*winner7_8).teamName);
 		}else if(i==1){
-			printf("\tRound2:\n");
+			printf("\t####<Round2>####\n");
 			winner12_34 = game(winner1_2, winner3_4);
 			winner56_78 = game(winner5_6, winner7_8);
 			printf("\tWinners of Second round are:\n\t%s\t%s\n\n",(*winner12_34).teamName,(*winner56_78).teamName);
 		}else if(i==2){
-			printf("\tFinal Match:\n");
+			printf("\t####<Final Match>####:\n");
 			champion = game(winner12_34, winner56_78);
 		}
 	//printf("\tCongratualation,\n\tChampion for this year are team of,%s\n",(*champion).teamName); 
@@ -204,6 +204,5 @@ void deleteLeague(Team **league){
 	}
 	for( i =0; i< 8 ; i++)//deleting leage teams malloc
 		free (*(league + i));
-	//free(league);
-	//return NULL;
+	//free(league); we cant free league as its static, compiler will handle it
 }

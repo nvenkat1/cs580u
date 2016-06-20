@@ -22,15 +22,11 @@ int main(){
 	//try2 : flush the buffer using fclose();
 	char buf1[51] = {0};
 	FILE * fptr = fopen("ex4.c", "r");
-
 	fscanf(fptr, "%s", &buf1);
 	fprintf(fptr,"%s\n", buf1);
-
 	fscanf(fptr, "%s", &buf1);
 	fprintf(fptr, "%s\n", buf1);
 	int * x = 0;
-	//fprintf(fptr, "*x =%d\n", *x);
-	fclose(fptr);
 	//*x;
 	//solution:fclose();
 

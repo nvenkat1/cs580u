@@ -42,11 +42,13 @@ int main(int argc, char *argv[]){
 		printf("Second String = %s\n", *(second+i));
 	}
 
-	char  ***third = {first, second};
+	char  **third[] = {first, second};
 	int j = 0;
 	for(i =0 ; i<2; i++){
 		for(j =0 ;  j < 5 ; j++){
-			printf("Third[%d] = \n", *(*(third+i) + j) );
+			printf("Third[%s] = \n", *(*(third+i) + j) );
+			//printf("Third[%p] = \n", *(third+i) );
+
 		}
 	}
 

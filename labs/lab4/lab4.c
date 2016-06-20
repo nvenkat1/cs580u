@@ -2,9 +2,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<time.h>
 
 int main(){
-
+	 srand (time(NULL));
 #if PART_A1
 	Team * team1 = initTeam("India");
 	int i = 0;
@@ -16,7 +17,10 @@ int main(){
                 printf("Defensive: %d\n", team1->players[i].defensive);
         }
 #endif
+#endif 	//Part A ends!
 
+
+#if PART_B
 	Team *league[8];
 	//char teamName1[] = "Team";
 	//char *teamName2 = generateTeamName("India",5);
@@ -32,9 +36,7 @@ int main(){
 	}
 #endif
 
-#endif 	//Part A ends!
 
-#if PART_B
 	//Part B + Part C
 	Team * champion = tournament(league);
 	printf("\tCongratualation!!,\n\tChampion for this year are team of,%s\n",(*champion).teamName);

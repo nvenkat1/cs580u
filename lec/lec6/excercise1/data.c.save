@@ -3,8 +3,8 @@
 
 Data* initData(char *old, int num){
 	Data *d = malloc(sizeof(Data));
-	d->str = malloc(strlen(old+1))
-	strcpy(d->str, old)
+	d->str = malloc(strlen(old+1));
+	strcpy(d->str, old);
 	d->num = num;
 	return d;
 

@@ -2,12 +2,12 @@
 #define VECTOR_H
 
 typedef struct vector{
-	Data * array;
+	int * data;
 	unsigned int current_size;
 	unsigned int capacity;
 }Vector;
 
-Data * initVector(Data *, int , int );
-void  deleteVector(Data *);
+Vector * initVector();
+void*  deleteVector(Vector *);
 
 #endif

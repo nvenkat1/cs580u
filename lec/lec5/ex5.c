@@ -66,7 +66,7 @@ int main(){
 	people[0].name = "Forrest";
 
 	//copy directly
-	people[1].name = hannibal;
+	people[1].name = "hannibal";
 
 	//also all in one line directly. one after the other.
 	// as struct are of same chunck when in array. 0 or array 1st element

@@ -10,4 +10,7 @@ void setName(struct *person, char *name){
 		i++;
 		name++;
 	}
+	/*Alternative to above while
+	while( (*person).name[i]++ = *name++) ;
+	*/
 }
