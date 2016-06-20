@@ -85,18 +85,12 @@ void vectorInsert2(Vector *v, int index, Data data){
                 }
                 (*v).capacity = (*v).capacity + 1;
                 Data *newData = malloc(sizeof(Data) * (*v).capacity);
-                //memcpy( newData, '\0', sizeof(Data) * (*v).current_size);
-                //Step 1 : Copy all element from old data location to new data location.
                 memcpy( newData, (*v).data, sizeof(Data) * (*v).current_size);
-                //Step 2 : Free old data pointer
-                //for first time, (*v).data would be null, but still we can call free on NULL. Its a nop
                 free((*v).data);
-                //Step 3 : Assign Newdata with new size's memory loation to old data pointer of struct vector
                 (*v).data =  newData;
         }else if( index < (*v).current_size){
                 (*v).current_size = index + 1;
         }else{
-                //(*v).current_size++;
         }
 	v->data[index] = data;
         (*v).current_size = index+  1;
