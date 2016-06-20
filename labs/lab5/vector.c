@@ -18,7 +18,10 @@ void vectorInsert(Vector *v, int index, Data dataIn){
 		if((*v).capacity == 0){
 			(*v).capacity = 1;
 		}
-		(*v).capacity = ((*v).capacity *2);
+
+		while(index >= (*v).capacity){
+			(*v).capacity = ((*v).capacity *2);
+		}
 		Data *newData = malloc(sizeof(Data) * (*v).capacity);
 		//memcpy( newData, '\0', sizeof(Data) * (*v).current_size);
 		//Step 1 : Copy all element from old data location to new data location.
@@ -85,7 +88,8 @@ void vectorInsert2(Vector *v, int index, Data dataIn){
         if(index >= (*v).capacity){
                 if((*v).capacity == 0){
                         (*v).capacity = 1;
-                }else{
+                }
+		while(index >= (*v).capacity){
                 	(*v).capacity = (*v).capacity + 1;
 		}
                 Data *newData = malloc(sizeof(Data) * (*v).capacity);
@@ -97,8 +101,8 @@ void vectorInsert2(Vector *v, int index, Data dataIn){
         }else{
         }
 	v->data[index] = dataIn;
-        //(*v).current_size = index+  1;
-        (*v).current_size++;
+        (*v).current_size = index+  1;
+        //(*v).current_size++;
 
 }
 
@@ -106,7 +110,8 @@ void vectorInsert3(Vector *v, int index, Data dataIn){
 	if(index >= (*v).capacity){
 		if((*v).capacity == 0){
 			(*v).capacity = 1;
-		}else{
+		}
+		while(index >= (*v).capacity){
 			v->capacity = (v->capacity * 3)/2 + 1;
 		}
 		Data *newData = malloc(sizeof(Data) * (*v).capacity);

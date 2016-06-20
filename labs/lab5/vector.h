@@ -5,8 +5,9 @@
 #define DEBUG_PART_1 1
 #define DEBUG_PART_2 1
 #define DEBUG_PART_2_1 1
-#define DEBUG_PART_2_2 0
+#define DEBUG_PART_2_2 1
 #define DEBUG_PART_3 1
+#define SHOW_PROFILE_DETAIL 1
 
 typedef struct vector{
 	Data * data;
