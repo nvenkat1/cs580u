@@ -10,6 +10,7 @@ int main(){
 	int i = 0, result=-1;
 	List  * list1 = createList();
 
+#if INSERT
 	printf("Indexing Starts from 0\n");
 	printf("Generating 0-10 array of Data struct \nand Adding Randomly at index 0-15\n");
 	for (i = 0 ; i < 10 ; i++){
@@ -24,18 +25,27 @@ int main(){
 	printf("\nInserting random value = %d at index 20\n", dataArray1[9].num);
 	insertData(list1, 20, dataArray1[9]);
 	printList(list1);
+#endif
+
+#if READ
+	printf("\n\tTest Read\n");
+	int index = rand() % 10 + 1;
+	Data * data = readData(list1, index);
+	printf("\tData at random index %d  = %d\n", index-1, (*data).num);
+
+#endif
+
+#if DELETE
 
 	printf("\nDeleting List at Random Index\n");
-//	for( i = 0 ; i < totalCount(list1); i++){
 	while(list1!=NULL){
 		int index = rand() % 25 + 1;
-		printf("\tDeleting at index = %d\n", index-1);
+		printf("\n\tDeleting at index = %d\n", index-1);
 		result = removeData(list1, index);
 		printList(list1);
 		if(list1->head==NULL) break;
 	}
-//	}
-
+#endif
 
 #if DELETE_1
 	printf("\tDelete Test\n");

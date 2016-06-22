@@ -2,6 +2,9 @@
 #define LIST_H
 #include "data.h"
 
+#define INSERT 1
+#define READ 1
+#define DELETE 0
 #define DELETE_1 0
 #define DELETE_2 0
 

@@ -56,29 +56,29 @@ void insertData(List * list, int index, Data data){
 
 void printList(List *list){
 	if(list->head==NULL){
-		 printf("\tCant print Empty List\n");
+		 printf("\tCant print Empty List!!\n\n");
 		return;
 	}
 	Node * node = list->head;
-	printf("\tHead->");
+	printf("\t[Head]->");
         while(node!=NULL){
-                printf("%d->", *(node->value));
+                printf("[%d]->", *(node->value));
                 node = node->next;
         }
-	printf("Tail\n");
+	printf("[Tail]\n");
 }
 void printListReverse(List *list){
 	if(list->head==NULL) {
-		printf("\tCant print Empty List\n");
+		printf("\tCant print Empty List!!\n\n");
 		return;
 	}
         Node * node = list->tail;
-        printf("\tTail->");
+        printf("\t[Tail]->");
         while(node!=NULL){
-                printf("%d->", *(node->value));
+                printf("[%d]->", *(node->value));
                 node = node->prev;
         }
-        printf("Head\n");
+        printf("[Head]\n");
 }
 
 void * freeList(List *list){
@@ -202,10 +202,21 @@ Data * readData(List * list, int index){
 	if(index == 1){
 		return list->head->value;
 	}
+	int count = totalCount(list);
+	if(index == count){
+		return list->tail->value;
+	}else if( index > count){
+		printf("\tIndex out of bound\n\tReturning Last element\n");
+		return list->tail->value;
+	}else{
 
-	int count = 1;
-	Node * node = list->head;
-	while(node->next!= NULL && count <= index) {
+		count = 1;
+		Node * node = list->head;
+		while(node->next!= NULL && count < index) {
+			count ++;
+			node = node->next;
+		}
+		return node->value;
 	}
 }
 //int Empty(List * list);
