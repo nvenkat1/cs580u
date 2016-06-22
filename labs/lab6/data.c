@@ -7,7 +7,7 @@ Data* initData(int num){
 	return d;
 }
 
-void * deleteData(Data *d){
+void  deleteData(Data *d){
 	free(d);
-	return NULL;
+	//return NULL;
 }

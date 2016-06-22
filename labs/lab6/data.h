@@ -6,6 +6,6 @@ typedef struct data{
 } Data;
 
 Data * initData(int);
-void * deleteData(Data *);
+void  deleteData(Data *);
 
 #endif

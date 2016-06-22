@@ -2,11 +2,13 @@
 #define LIST_H
 #include "data.h"
 
-#define INSERT 1
-#define READ 1
-#define DELETE 1
+#define PART_A 0
+#define INSERT 0
+#define READ 0
+#define DELETE 0
 #define DELETE_1 0
 #define DELETE_2 0
+#define PART_B 1
 
 typedef struct list{
 	struct node *head;
@@ -31,4 +33,6 @@ void printListReverse(List *list);
 void * freeList(List *list);
 void freeNode(Node * node);
 int totalCount(List *list);
+int searchForward(List *list, int num);
+int searchBackward(List *list, int num);
 #endif

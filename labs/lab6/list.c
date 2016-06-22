@@ -95,16 +95,18 @@ void freeNode(Node * node){
 		if(node->next != NULL){
 			tempNode = node->next;
 	//		tempNode = tempNode->next;
-			free((*node).value);
+			//free((*node).value);
+			deleteData((*node).value);
 			node->value = NULL;
 			node->next = NULL;
 			node->prev = NULL;
 			free(node);
-//			node = NULL;
+			node = NULL;
 			node = tempNode;
 			//node = node->next;
 		}else{
-			free((*node).value);
+			//free((*node).value);
+			deleteData((*node).value);
 			node->next = NULL;
 			node->prev = NULL;
 			free(node);
@@ -234,4 +236,37 @@ int Empty(List * list1){
                 if(list1->head==NULL) break;
         }
 	return 0;
+}
+int searchForward(List * list, int num){
+	if(list->head==NULL){
+                printf("\tEmpty List\n");
+                return 1;
+        }
+	int index = -1;
+	Node *node = list->head;
+	while(node->next!=NULL){
+		index++;
+		if( (*(*node).value).num == num){
+			return index;
+		}
+		node = node->next;
+	}
+	return -1;
+}
+
+int searchBackward(List * list, int num){
+        if(list->head==NULL){
+                printf("\tEmpty List\n");
+                return 1;
+        }
+        int index = -1;
+        Node *node = list->tail;
+        while(node->prev!=NULL){
+                index++;
+                if( (*(*node).value).num == num){
+                        return index;
+                }
+                node = node->prev;
+        }
+        return -1;
 }
