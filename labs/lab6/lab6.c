@@ -21,7 +21,7 @@ int main(){
 		//printListReverse(list1);
 	}
 
-	printf("\nInserting random value = %d at index 20\n", dataArray1[9]);
+	printf("\nInserting random value = %d at index 20\n", dataArray1[9].num);
 	insertData(list1, 20, dataArray1[9]);
 	printList(list1);
 

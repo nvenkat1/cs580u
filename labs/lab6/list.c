@@ -61,7 +61,7 @@ void printList(List *list){
 	Node * node = list->head;
 	printf("\tHead->");
         while(node!=NULL){
-                printf("%d->", node->value);
+                printf("%d->", node->value.num);
                 node = node->next;
         }
 	printf("Tail\n");
@@ -74,7 +74,7 @@ void printListReverse(List *list){
         Node * node = list->tail;
         printf("\tTail->");
         while(node!=NULL){
-                printf("%d->", node->value);
+                printf("%d->", node->value.num);
                 node = node->prev;
         }
         printf("Head\n");
