@@ -11,7 +11,7 @@ int main(){
 	List  * list1 = createList();
 #if PART_A
 #if INSERT
-	printf("PARTA:\nIndexing Starts from 0\n");
+	printf("\n####PARTA####\nIndexing Starts from 0\n");
 	printf("Generating 0-10 array of Data struct \nand Adding Randomly at index 0-15\n");
 	for (i = 0 ; i < 10 ; i++){
 		dataArray1[i].num = i+1;
@@ -25,6 +25,20 @@ int main(){
 	printf("\nInserting random value = %d at index 20\n", dataArray1[9].num);
 	insertData(list1, 20, dataArray1[9]);
 	printList(list1);
+
+	int num;
+        printf("\n\tEnter number to search (0-10)\n\t>>");
+        scanf("\t%d",&num);
+
+        int forwardIndex = searchForward(list1, num);
+        int backwardIndex = searchBackward(list1, num);
+
+        if(forwardIndex != -1 || backwardIndex != -1){
+                printf("\tForward Index = %d\n\tBackward Index = %d\n", forwardIndex, backwardIndex);
+        }else{
+                printf("\t Array index out of bound\n");
+                printf("\tForward Index = %d\n\tBackward Index = %d\n", 0, 0);
+        }
 #endif
 
 #if READ
@@ -45,7 +59,7 @@ int main(){
 
 
 #if PART_B
-        printf("\n\nPARTB:\nGenerating 0-10 array of Data struct \nand Adding Randomly at index 0-15\n");
+        /*printf("\n\n####PARTB####\nGenerating 0-10 array of Data struct \nand Adding Randomly at index 0-15\n");
         for (i = 0 ; i < 10 ; i++){
                 dataArray1[i].num = i+1;
                 int index = rand() % 15 + 1;
@@ -72,12 +86,10 @@ int main(){
 		printf("\t Array index out of bound\n");
 		printf("\tForward Index = %d\n\tBackward Index = %d\n", 0, 0);
 	}
-
+	*/
 #endif //PARTB
 
 	list1 = freeList(list1);
-
-
 
 
 #if DELETE_1
@@ -118,10 +130,6 @@ int main(){
 	printf("\t Deleting only element test passed\n");
 
 #endif
-
-	//printf("After Deleting 1st index value\n");
-	//printList(list1);
-
 
 	return 0;
 }

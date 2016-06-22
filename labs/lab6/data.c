@@ -9,5 +9,6 @@ Data* initData(int num){
 
 void  deleteData(Data *d){
 	free(d);
+	d = NULL;
 	//return NULL;
 }
