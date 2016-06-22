@@ -5,7 +5,8 @@
 
 Node * createNode(Data data){
 	Node * node = malloc(sizeof(Node));
-	node->value = data;
+	//node->value = data;
+	node->value = initData(data.num);
 	node->next = NULL;
 	node->prev = NULL;
 	return node;
@@ -61,7 +62,7 @@ void printList(List *list){
 	Node * node = list->head;
 	printf("\tHead->");
         while(node!=NULL){
-                printf("%d->", node->value.num);
+                printf("%d->", *(node->value));
                 node = node->next;
         }
 	printf("Tail\n");
@@ -74,14 +75,14 @@ void printListReverse(List *list){
         Node * node = list->tail;
         printf("\tTail->");
         while(node!=NULL){
-                printf("%d->", node->value.num);
+                printf("%d->", *(node->value));
                 node = node->prev;
         }
         printf("Head\n");
 }
 
 void * freeList(List *list){
-        freeNode((*list).head);
+       	freeNode((*list).head);
 	list->head = NULL;
 	list->tail = NULL;
         free(list);
@@ -94,6 +95,8 @@ void freeNode(Node * node){
 		if(node->next != NULL){
 			tempNode = node->next;
 	//		tempNode = tempNode->next;
+			free((*node).value);
+			node->value = NULL;
 			node->next = NULL;
 			node->prev = NULL;
 			free(node);
@@ -101,6 +104,7 @@ void freeNode(Node * node){
 			node = tempNode;
 			//node = node->next;
 		}else{
+			free((*node).value);
 			node->next = NULL;
 			node->prev = NULL;
 			free(node);
@@ -169,8 +173,8 @@ int removeData(List * list, int index){
 				node->prev->next = node->next;
 				node->next->prev = node->prev;
 				free(node);
-				node->next = NULL;
-				node->prev = NULL;
+//				node->next = NULL;
+//				node->prev = NULL;
 				return 0;
 			}
 		}
@@ -190,5 +194,18 @@ int totalCount(List *list){
 	}
 	return count;
 }
-//Data * readData(List * list, int index);
+Data * readData(List * list, int index){
+	if(list->head==NULL){
+		printf("\tEmpty List\n");
+		return;
+	}
+	if(index == 1){
+		return list->head->value;
+	}
+
+	int count = 1;
+	Node * node = list->head;
+	while(node->next!= NULL && count <= index) {
+	}
+}
 //int Empty(List * list);

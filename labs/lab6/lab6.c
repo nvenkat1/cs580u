@@ -26,12 +26,15 @@ int main(){
 	printList(list1);
 
 	printf("\nDeleting List at Random Index\n");
-	for( i = 0 ; i < totalCount(list1); i++){
+//	for( i = 0 ; i < totalCount(list1); i++){
+	while(list1!=NULL){
 		int index = rand() % 25 + 1;
 		printf("\tDeleting at index = %d\n", index-1);
 		result = removeData(list1, index);
 		printList(list1);
+		if(list1->head==NULL) break;
 	}
+//	}
 
 
 #if DELETE_1

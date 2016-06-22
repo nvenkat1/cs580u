@@ -11,7 +11,8 @@ typedef struct list{
 }List;
 
 typedef struct node{
-	Data value;
+	//Data value;
+	Data *value;
 	struct node * next;
 	struct node * prev;
 }Node;
