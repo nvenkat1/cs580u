@@ -28,7 +28,7 @@ int main(){
 #endif
 
 #if READ
-	printf("\n\tTest Read\n");
+	printf("\nReading at random index\n");
 	int index = rand() % 10 + 1;
 	Data * data = readData(list1, index);
 	printf("\tData at random index %d  = %d\n", index-1, (*data).num);

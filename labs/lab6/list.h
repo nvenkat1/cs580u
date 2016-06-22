@@ -4,7 +4,7 @@
 
 #define INSERT 1
 #define READ 1
-#define DELETE 0
+#define DELETE 1
 #define DELETE_1 0
 #define DELETE_2 0
 
