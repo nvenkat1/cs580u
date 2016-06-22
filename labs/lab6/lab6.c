@@ -15,7 +15,7 @@ int main(){
 	for (i = 0 ; i < 10 ; i++){
 		dataArray1[i].num = i+1;
 		int index = rand() % 15 + 1;
-		printf("\tAdding %d at %d\n", dataArray1[i], index-1);
+		printf("\tAdding %d at %d\n", dataArray1[i].num, index-1);
 		insertData(list1, index, dataArray1[i]);
 		printList(list1);
 		//printListReverse(list1);
