@@ -219,4 +219,19 @@ Data * readData(List * list, int index){
 		return node->value;
 	}
 }
-//int Empty(List * list);
+int Empty(List * list1){
+	int result = -1;
+	if(list1->head==NULL){
+                printf("\tEmpty List\n");
+                return 1;
+        }
+	printf("\nDeleting List at Random Index\n");
+        while(list1!=NULL){
+                int index = rand() % 25 + 1;
+                printf("\n\tDeleting at index = %d\n", index-1);
+                result = removeData(list1, index);
+                printList(list1);
+                if(list1->head==NULL) break;
+        }
+	return 0;
+}

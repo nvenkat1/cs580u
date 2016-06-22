@@ -36,14 +36,8 @@ int main(){
 #endif
 
 #if DELETE
-
-	printf("\nDeleting List at Random Index\n");
-	while(list1!=NULL){
-		int index = rand() % 25 + 1;
-		printf("\n\tDeleting at index = %d\n", index-1);
-		result = removeData(list1, index);
-		printList(list1);
-		if(list1->head==NULL) break;
+	if(Empty(list1)==0){
+		printf("\tList is empty\n\n");
 	}
 #endif
 
