@@ -1,4 +1,4 @@
-#include "data.h"
+//#include "data.h"
 #include "vector.h"
 #include<stdlib.h>
 #include<stdio.h>

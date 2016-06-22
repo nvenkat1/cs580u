@@ -1,4 +1,4 @@
-#include "data.h"
+//#include "data.h"
 #ifndef VECTOR_H
 #define VECTOR_H
 
@@ -8,6 +8,10 @@
 #define DEBUG_PART_2_2 1
 #define DEBUG_PART_3 1
 #define SHOW_PROFILE_DETAIL 1
+
+typedef struct data{
+        int num;
+}Data;
 
 typedef struct vector{
 	Data * data;

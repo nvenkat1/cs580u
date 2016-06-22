@@ -1,0 +1,6 @@
+Node * createNode(int num);
+List * createList();
+void insertData(List * list, int index, Data value);
+int removeData(List * list, int index);
+Data * readData(List * list, int index);
+int Empty(List * list);
