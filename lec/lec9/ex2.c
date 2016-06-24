@@ -27,12 +27,17 @@ void insertNode(Tree *t, Data d){
 		insert(d, t->root);
 	}
 }
-Data * searchNode(Tree *t, Data d){
+Data * findNode(Tree *t, Data d){
         if(t.root == NULL){
                 //t->root = createNode(d,NULL);
 		return NULL;
         }else{
-                search(d, t->root);
+		Node *n = search(d, t->root)->data;
+		if(n!=NULL)
+			return n->d;
+		else
+			return NULL;
+                //search(d, t->root);
         }
 }
 
@@ -67,7 +72,9 @@ void insert(Data d, Node *root){
 	//if value is equal.. we are not handling that.
 }
 
-Data * seach(Data d, Node *root){
+//changed return type from data to ndoe//
+
+Node * search(Data d, Node *root){
         if(d.data < root->d.data){
                 // If less is null
                 if(root->left == NULL){
@@ -89,9 +96,86 @@ Data * seach(Data d, Node *root){
                         return search( data, root->right);
                 }
         }else{
-		return &(root.data);
+		//return &(root.data);
+		return  root;
 	}
 }
+
+void deleteLeaf(Node *n){
+	// address of this node  == parent of left child htne its left node
+	// address of this node  == parent of right child htne its right node
+	if(n->parent->left == n)
+		n->parent->left = NULL;
+	else
+		n->parent->right = NULL;
+	free(n);
+	n= NULL;
+}
+
+Node * findMaxinMinSubTree(Node * p){
+	p = p->left;
+
+	while(p->right!=NULL)
+		p = p->right;
+
+	return p;
+}
+void shortCircuit(Node *n){
+	//first check whther its left or right child
+	if(n->parent->left == n){
+		//nwo we  dont know node we are trying to delete has left subtree or riht sub tree to update new pointers
+		if(n->left ==NULL){
+			n->parent->left = n->right;
+			n->right->parent  = n->parent;
+		}else{
+			n->parent->left = n->left;
+			n->left->parent  = n->parent;
+
+        }else{	///this is reamingn update it.
+		if(n->right == NULL){
+			n->parent->right = n->right;
+			n->right->parent  = n->parent;
+		}else{
+			n->parent->right = n->left;
+			n->left->parent  = n->parent;
+		}
+	}
+}
+Node * promotion(Node *n){
+	Node * promot = findMaxInMinSubtree(n);
+	//copy and promote
+	n->data = promot->data;
+
+	//now copited node, has child or doesnt have child
+	if(promote->left == NULL && promote->right==NULL);
+		deleteleaf(prmote);
+	else	//as we already found max or min, it will have only 1 child
+		shortCircuit(promote);
+}
+
+void deleteNode(struct tree * t, struct Data d){
+	Node * to_delete = searchNode(t,d);
+
+	if(to_delete !=NULL){
+		//how to know which node to delete
+		//chcekc left and right pointers
+		//then to check these are not equal to null
+		if(to_delete->left !=NULL && to_delete->right != NULL){
+			//it has 2 childers
+			promotion(to_delete);
+		}else if(to_delete->left !=NULL || to_delete->right != NULL){
+			//has only one child
+			shortCircuit(to_delete);
+		}else{
+			//means its leaf.
+			deleteLeaf(to_delete);
+		}
+
+	}else{
+		printf("Not Found\n");
+	}
+}
+
 int main(){
 
 
