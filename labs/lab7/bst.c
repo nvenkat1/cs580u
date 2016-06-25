@@ -52,23 +52,6 @@ void insertNode(Node * root, Data data){
 		printf("\tYou can not insert Duplicate values in Binary Search Tree\n");
 	}
 }
-void printSearchResult(Node *node){
-	printf("\tGiven value was found ");
-	if(node->parent == NULL){
-		printf("\n\tAt Root, With Node value = %d",node->data->num);
-	}else{
-		printf("\n\tWith Node value = %d \n\tWith Parent Node Value = %d",node->data->num, node->parent->data->num);
-	}
-
-	if(node->right!= NULL){
-		printf("\n\tWith Right Child Node Value = %d",node->right->data->num);
-	}else if(node->left!= NULL){
-		printf("\n\tWith Left Child Node Value = %d",node->left->data->num);
-	}else{
-		printf("\n\tIts a leaf Node");
-	}
-	printf("\n");
-}
 Data* findNode(Tree * tree, Data data){
         if((*tree).root == NULL){
 		return NULL;
@@ -104,4 +87,23 @@ Node* searchNode(Node * root, Data data){
 		//return &((*root));
 		return root;
 	}
+}
+void printSearchResult(Node *node){
+	printf("\tGiven value was found ");
+	if(node->parent == NULL){
+		printf("\n\tAt Root, With Node value = %d",node->data->num);
+	}else{
+		printf("\n\tWith Node value = %d \n\tWith Parent Node Value = %d",node->data->num, node->parent->data->num);
+	}
+	if(node->right!= NULL || node->left!= NULL){
+		if(node->right!= NULL){
+			printf("\n\tWith Right Child Node Value = %d",node->right->data->num);
+		}
+		if(node->left!= NULL){
+			printf("\n\tWith Left Child Node Value = %d",node->left->data->num);
+		}
+	}else{
+			printf("\n\tIts a leaf Node");
+	}
+	printf("\n");
 }

@@ -24,4 +24,5 @@ void insert(Tree * tree, Data value);
 void insertNode(Node * root, Data value);
 Data* findNode(Tree * tree, Data data);
 Node * searchNode(Node * node, Data value);
+void printSearchResult(Node *node);
 #endif
