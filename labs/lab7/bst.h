@@ -3,6 +3,8 @@
 
 #include "data.h"
 
+#define PART1 1
+
 typedef struct node {
 	Data *data;
 	struct node *left;

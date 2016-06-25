@@ -38,10 +38,10 @@ just print a message that
 you cannot insert duplicate values
 */
 void insertNode(Node * root, Data data){
-	/*Make sure you check for the special case 
+	/*Make sure you check for the special case
 	of an empty tree [if(bst->root == NULL)],
-	*/ 
-	if((data).num < (*(*root).data).num){
+	*/
+	if(data.num < (*(*root).data).num){
 		if( (*root).left == NULL){
 			(*root).left = createNode(data, root);
 		}else{
