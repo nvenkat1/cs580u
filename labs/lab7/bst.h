@@ -4,6 +4,8 @@
 #include "data.h"
 
 #define PART1 1
+#define DEBUG1 0
+#define PART2 1
 
 typedef struct node {
 	Data *data;
@@ -20,6 +22,6 @@ Tree * createTree();
 Node * createNode(Data d, Node *parent);
 void insert(Tree * tree, Data value);
 void insertNode(Node * root, Data value);
-void search(Tree * tree, Data data);
+Data* findNode(Tree * tree, Data data);
 Node * searchNode(Node * node, Data value);
 #endif
