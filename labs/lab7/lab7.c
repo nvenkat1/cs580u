@@ -28,14 +28,32 @@ int main(){
 
 
 #if PART2
-	printf("\n\tSearching Data value 9 in Tree\n");
-	Data *search = findNode(tree, data[7]);
-	if(search!=NULL)
-		printf("\tGiven Data value %d, Found in Tree with Node value: %d\n", data[7], search->num);
 	printf("\n\tSearching Data value 1 in Tree\n");
-	search = findNode(tree, data[8]);
-	if(search!=NULL)
-		printf("\tGiven Data value %d, Found in Tree with Node value: %d\n", data[8], search->num);
+	Data *searchResult = findNode(tree, data[8]);
+	if(searchResult!=NULL)
+		printf("\tGiven Data value %d, Found in Tree with Node value: %d\n", data[8], searchResult->num);
+
+	//int input= -1;
+	Data input;
+	input.num=-1;
+	do{
+		printf("\n\tEnter value to search \n\t");
+		scanf("%d", &(input.num));
+
+		if(input.num!= 0 && input.num!=-1 ){
+			printf("\n\tSearching Data value %d in Tree\n", input.num);
+			searchResult = findNode(tree, input);
+			if(searchResult!=NULL)
+				printf("\tSearch succeeded!\n");
+		}
+
+		if(input.num == -1){
+			printf("\tInvalid input\n");
+		}
+	}while(input.num!=0 && input.num!= -1);	
+	//-1 is initioal value, this check is added if user enters character, 
+	//if he entered character, it will only catch -1 in %d of scanf and 
+	// we can exit from there from infinite loop
 #endif
 	return 0;
 }
