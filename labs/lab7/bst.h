@@ -20,9 +20,19 @@ typedef struct tree{
 
 Tree * createTree();
 Node * createNode(Data d, Node *parent);
+
 void insert(Tree * tree, Data value);
 void insertNode(Node * root, Data value);
+
 Data* findNode(Tree * tree, Data data);
 Node * searchNode(Node * node, Data value);
+
+void removeLead(Tree *, Node *);
+void shortCircuit(Tree *, Node *);
+void promotion(Tree *, Node *);
+void removeNode(Tree *, Data );
+
+void * freeNode(Node * node);
 void printSearchResult(Node *node);
+
 #endif

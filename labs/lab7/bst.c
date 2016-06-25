@@ -107,3 +107,52 @@ void printSearchResult(Node *node){
 	}
 	printf("\n");
 }
+void * freeNode(Node * node){
+	node->data = deleteData(node->data);
+	node->left = node->right = node->parent = NULL;
+	free(node);
+	return NULL;
+}
+void removeLeaf(Tree * tree, Node * node){
+	if(node->parent->left == node){
+		//means its a left leaf
+		node->parent->left = NULL;
+	}else{
+		//its a right leaf
+		node->parent->right = NULL;
+	}
+	node = freeNode(node);
+}
+void shortCircuit(Tree * bst, Node * d_node){
+}
+void promotion(Tree * bst, Node * d_node){
+}
+/**To Delete Any Node We Have 3 Cases
+** Any Node Can Have 1. No Child  2. One Child    3. 2 Childs
+			x		x		x
+		       / \	       / \             / \
+		      N   N           y   N           y   z
+*/
+void removeNode(Tree * tree, Data data){
+        if((*tree).root == NULL){
+		printf("\tEmpty Tree\n");
+                return;
+        }else{
+                Node * toDelete = searchNode((*tree).root, data);
+
+		if(toDelete!=NULL){
+			//node with both left and right child
+			if(toDelete->left !=NULL && toDelete->right != NULL){
+				promotion(tree, toDelete);
+			}else if(toDelete->left != NULL || toDelete->right != NULL){
+				//It has at least one child left or right
+				shortCircuit(tree, toDelete);
+			}else{
+				//its a leaf node
+				removeLeaf(tree, toDelete);
+			}
+		}else{
+			printf("\tNode to be deleted not Found\n\n");
+		}
+	}
+}

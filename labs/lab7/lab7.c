@@ -28,21 +28,18 @@ int main(){
 
 
 #if PART2
-	printf("\n\tSearching Data value 1 in Tree\n");
-	Data *searchResult = findNode(tree, data[8]);
-	if(searchResult!=NULL)
-		printf("\tGiven Data value %d, Found in Tree with Node value: %d\n", data[8], searchResult->num);
-
-	//int input= -1;
 	Data input;
+
+	//>>SEARCH
+	printf("\n\t>>>>>>>>>>SEARCH<<<<<<<<<<\n");
 	input.num=-1;
 	do{
-		printf("\n\tEnter value to search \n\t");
+		printf("\tEnter value to search \n\t");
 		scanf("%d", &(input.num));
 
 		if(input.num!= 0 && input.num!=-1 ){
 			printf("\n\tSearching Data value %d in Tree\n", input.num);
-			searchResult = findNode(tree, input);
+			Data *searchResult = findNode(tree, input);
 			if(searchResult!=NULL)
 				printf("\tSearch succeeded!\n");
 		}
@@ -54,6 +51,23 @@ int main(){
 	//-1 is initioal value, this check is added if user enters character, 
 	//if he entered character, it will only catch -1 in %d of scanf and 
 	// we can exit from there from infinite loop
+
+	//>>DELETE
+	printf("\n\t>>>>>>>>>>DELETE<<<<<<<<<<\n");
+        input.num=-1;
+        do{
+                printf("\tEnter a value to Delete \n\t");
+                scanf("%d", &(input.num));
+
+                if(input.num!= 0 && input.num!=-1 ){
+                        printf("\n\tDeleting Data value %d from Tree\n", input.num);
+			removeNode(tree, input);
+                }
+
+                if(input.num == -1){
+                        printf("\tInvalid input\n");
+                }
+        }while(input.num!=0 && input.num!= -1);
 #endif
 	return 0;
 }
