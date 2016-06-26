@@ -222,24 +222,52 @@ void removeNode(Tree * tree, Data data){
 		}
 	}
 }
+
+//Tree Iterating Approaches
+
+/*		a	-> PreOrder 	[a b c] (root left right)
+	       / \	-> InOrder 	[b a c] (left root right) 
+              b   c	-> PostOrder	[b c a] (left right root)
+
+*/
 void inOrder(Node *node){
 	if(node != NULL){
 		inOrder(node->left);	
 		printf("%d ",node->data->num);
 		inOrder(node->right);
-	}
+	}	
 }
 void preOrder(Node *node){
 	if(node!=NULL){
 		printf("%d ",node->data->num);
 		preOrder(node->left);
 		preOrder(node->right);
-	}
+	}	
 }
 void postOrder(Node *node){
    	if(node != NULL){
 		postOrder(node->left);
 		postOrder(node->right);
 	   	printf("%d ", node->data->num);
-   }
+   	}
+}
+
+//Delete Tree Functionalities
+/*		a	-> PreOrderDelete	[a b c] (root left right)
+	       / \	-> InOrderDelete 	[b a c] (left root right) 
+              b   c	-> PostOrderDelete	[b c a] (left right root)
+
+*/
+void* postOrderDelete(Node *node){
+	if(node!=NULL){
+		postOrderDelete(node->left);
+		postOrderDelete(node->right);
+		node = freeNode(node);
+	}
+	return NULL;
+}
+void* deleteTree(Tree *tree){
+	tree->root = postOrderDelete(tree->root);
+	free(tree);
+	return NULL;	
 }

@@ -6,6 +6,8 @@
 #define PART1 1
 #define DEBUG1 0
 #define PART2 1
+#define PART2_1 0
+#define PART2_2 1
 
 typedef struct node {
 	Data *data;
@@ -39,4 +41,8 @@ void printSearchResult(Node *node);
 void inOrder(Node *node);
 void preOrder(Node *node);
 void postOrder(Node *node);
+
+void* postOrderDelete(Node *node);
+void* deleteTree(Tree *tree);
+
 #endif

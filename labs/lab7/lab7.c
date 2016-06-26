@@ -30,6 +30,7 @@ int main(){
 #if PART2
 	Data input;
 
+#if PART2_1
 	//>>SEARCH
 	printf("\n\t>>>>>>>>>>SEARCH<<<<<<<<<<\n");
 	input.num=-1;
@@ -51,7 +52,9 @@ int main(){
 	//-1 is initioal value, this check is added if user enters character, 
 	//if he entered character, it will only catch -1 in %d of scanf and 
 	// we can exit from there from infinite loop
+#endif
 
+#if PART2_2
 	//>>DELETE
 	printf("\n\t>>>>>>>>>>DELETE<<<<<<<<<<\n");
         input.num=-1;
@@ -69,6 +72,18 @@ int main(){
                 }
         }while(input.num!=0 && input.num!= -1);
 
+#endif
+	
+	//Print Test
+	printf("\tPreOrder\n\t");
+	preOrder(tree->root);
+	printf("\n\tInOrder\n\t");
+	inOrder(tree->root);
+	printf("\n\tPostOrder\n\t");
+	postOrder(tree->root);
+	printf("\n");
+
+	tree = deleteTree(tree);
 	
 #endif
 	return 0;
