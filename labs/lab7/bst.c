@@ -148,6 +148,7 @@ void shortCircuit(Tree * tree, Node * node){
 	}
 }
 
+
 Node * findMaxMinSubTree(Node * node){
 	//This will always return maximum node among subtree
 	//But which is less thatn current node.
@@ -161,9 +162,9 @@ Node * findMaxMinSubTree(Node * node){
 void promotion(Tree * tree, Node * node){
 	Node *promot = findMaxMinSubTree(node);
 	//first copy data and then promot
-	node->data = promot->data;
+	node->data->num = promot->data->num;
 
-	//Check if Node to be Promoted has Child or not
+	//Check if Node to be Promoted or not
 	if(promot->left == NULL && promot->right == NULL){
 		//Means its a leaf node.
 		removeLeaf(tree, promot);
@@ -171,7 +172,7 @@ void promotion(Tree * tree, Node * node){
 		//It has only One child
 		//Since when we found max and min. 
 		//Max and min are one of the node with one child.
-		shortCircuit(tree, promot);
+		shortCircuit(tree, promot); 
 	}
 	
 }
