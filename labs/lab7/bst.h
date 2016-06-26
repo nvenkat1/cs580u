@@ -6,7 +6,7 @@
 #define PART1 1
 #define DEBUG1 0
 #define PART2 1
-#define PART2_1 0
+#define PART2_1 1 
 #define PART2_2 1
 
 typedef struct node {
