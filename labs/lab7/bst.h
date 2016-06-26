@@ -27,6 +27,7 @@ void insertNode(Node * root, Data value);
 Data* findNode(Tree * tree, Data data);
 Node * searchNode(Node * node, Data value);
 
+Node * findMaxMinSubTree(Node * node);
 void removeLead(Tree *, Node *);
 void shortCircuit(Tree *, Node *);
 void promotion(Tree *, Node *);
@@ -35,4 +36,7 @@ void removeNode(Tree *, Data );
 void * freeNode(Node * node);
 void printSearchResult(Node *node);
 
+void inOrder(Node *node);
+void preOrder(Node *node);
+void postOrder(Node *node);
 #endif

@@ -56,7 +56,7 @@ int main(){
 	printf("\n\t>>>>>>>>>>DELETE<<<<<<<<<<\n");
         input.num=-1;
         do{
-                printf("\tEnter a value to Delete \n\t");
+                printf("\n\tEnter a value to Delete \n\t");
                 scanf("%d", &(input.num));
 
                 if(input.num!= 0 && input.num!=-1 ){
@@ -68,6 +68,8 @@ int main(){
                         printf("\tInvalid input\n");
                 }
         }while(input.num!=0 && input.num!= -1);
+
+	
 #endif
 	return 0;
 }

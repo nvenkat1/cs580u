@@ -123,9 +123,57 @@ void removeLeaf(Tree * tree, Node * node){
 	}
 	node = freeNode(node);
 }
-void shortCircuit(Tree * bst, Node * d_node){
+void shortCircuit(Tree * tree, Node * node){
+	//first check its right or left child
+	if(node->parent->left == node){
+		if(node->left == NULL){
+			node->parent->right = node->right;
+			node->right->parent = node->parent;
+			node = freeNode(node);
+		}else{
+			node->parent->left = node->left;
+			node->left->parent = node->parent;
+			node = freeNode(node);
+		}
+	}else{	//it is right node
+		if(node->right==NULL){
+			node->parent->left = node->left;
+			node->left->parent = node->parent;
+			node = freeNode(node);
+		}else{
+			node->parent->right = node->right;
+			node->right->parent = node->parent;
+			node = freeNode(node);
+		}
+	}
 }
-void promotion(Tree * bst, Node * d_node){
+
+Node * findMaxMinSubTree(Node * node){
+	//This will always return maximum node among subtree
+	//But which is less thatn current node.
+	node = node->left;
+	while(node->right != NULL){
+		node = node->right;
+	}
+	return node;
+}
+
+void promotion(Tree * tree, Node * node){
+	Node *promot = findMaxMinSubTree(node);
+	//first copy data and then promot
+	node->data = promot->data;
+
+	//Check if Node to be Promoted has Child or not
+	if(promot->left == NULL && promot->right == NULL){
+		//Means its a leaf node.
+		removeLeaf(tree, promot);
+	}else{
+		//It has only One child
+		//Since when we found max and min. 
+		//Max and min are one of the node with one child.
+		shortCircuit(tree, promot);
+	}
+	
 }
 /**To Delete Any Node We Have 3 Cases
 ** Any Node Can Have 1. No Child  2. One Child    3. 2 Childs
@@ -144,15 +192,54 @@ void removeNode(Tree * tree, Data data){
 			//node with both left and right child
 			if(toDelete->left !=NULL && toDelete->right != NULL){
 				promotion(tree, toDelete);
+				printf("\n\t");
+				inOrder(tree->root);
+				printf("\n\t");
+				preOrder(tree->root);
+				printf("\n\t");
+				postOrder(tree->root);
 			}else if(toDelete->left != NULL || toDelete->right != NULL){
 				//It has at least one child left or right
 				shortCircuit(tree, toDelete);
+				printf("\n\t");
+				inOrder(tree->root);
+				printf("\n\t");
+				preOrder(tree->root);
+				printf("\n\t");
+				postOrder(tree->root);
 			}else{
 				//its a leaf node
 				removeLeaf(tree, toDelete);
+				printf("\n\t");
+				inOrder(tree->root);
+				printf("\n\t");
+				preOrder(tree->root);
+				printf("\n\t");
+				postOrder(tree->root);
 			}
 		}else{
 			printf("\tNode to be deleted not Found\n\n");
 		}
 	}
+}
+void inOrder(Node *node){
+	if(node != NULL){
+		inOrder(node->left);	
+		printf("%d ",node->data->num);
+		inOrder(node->right);
+	}
+}
+void preOrder(Node *node){
+	if(node!=NULL){
+		printf("%d ",node->data->num);
+		preOrder(node->left);
+		preOrder(node->right);
+	}
+}
+void postOrder(Node *node){
+   	if(node != NULL){
+		postOrder(node->left);
+		postOrder(node->right);
+	   	printf("%d ", node->data->num);
+   }
 }
