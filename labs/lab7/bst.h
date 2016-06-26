@@ -38,9 +38,9 @@ void removeNode(Tree *, Data );
 void * freeNode(Node * node);
 void printSearchResult(Node *node);
 
-void inOrder(Node *node);
-void preOrder(Node *node);
-void postOrder(Node *node);
+void inOrder(Tree *tree, Node *node);
+void preOrder(Tree *tree, Node *node);
+void postOrder(Tree *tree, Node *node);
 
 void* postOrderDelete(Node *node);
 void* deleteTree(Tree *tree);

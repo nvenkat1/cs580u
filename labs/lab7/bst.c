@@ -124,6 +124,21 @@ void removeLeaf(Tree * tree, Node * node){
 	node = freeNode(node);
 }
 void shortCircuit(Tree * tree, Node * node){
+	if(node->parent == NULL || tree->root == node){
+		if(node->left == NULL){			
+			//Tree has 1 root and only right subtrree, left subtree is NULL
+			tree->root = node->right;
+			node->right->parent = NULL;
+			node = freeNode(node);
+			return;
+		}else{
+			tree->root = node->left;
+			node->left->parent = NULL;
+			node = freeNode(node);
+			return;
+		}
+	}
+	
 	//first check its right or left child
 	if(node->parent->left == node){
 		if(node->left == NULL){
@@ -183,40 +198,51 @@ void promotion(Tree * tree, Node * node){
 		      N   N           y   N           y   z
 */
 void removeNode(Tree * tree, Data data){
-        if((*tree).root == NULL){
+        if(tree == NULL){ 
+		printf("\tTree Does not exists\n"); 
+		return;
+	}
+	
+	if((*tree).root == NULL){
 		printf("\tEmpty Tree\n");
                 return;
         }else{
                 Node * toDelete = searchNode((*tree).root, data);
-
+		//When only root reamining
+		if(toDelete == tree->root && toDelete->left == NULL && toDelete->right == NULL){
+			toDelete = freeNode(toDelete);
+			tree->root = toDelete;
+			//tree = deleteTree(tree);
+			return;
+		}
 		if(toDelete!=NULL){
 			//node with both left and right child
 			if(toDelete->left !=NULL && toDelete->right != NULL){
 				promotion(tree, toDelete);
 				printf("\n\t");
-				inOrder(tree->root);
+				inOrder(tree, tree->root);
 				printf("\n\t");
-				preOrder(tree->root);
+				preOrder(tree, tree->root);
 				printf("\n\t");
-				postOrder(tree->root);
+				postOrder(tree, tree->root);
 			}else if(toDelete->left != NULL || toDelete->right != NULL){
 				//It has at least one child left or right
 				shortCircuit(tree, toDelete);
 				printf("\n\t");
-				inOrder(tree->root);
+				inOrder(tree, tree->root);
 				printf("\n\t");
-				preOrder(tree->root);
+				preOrder(tree, tree->root);
 				printf("\n\t");
-				postOrder(tree->root);
+				postOrder(tree, tree->root);
 			}else{
 				//its a leaf node
 				removeLeaf(tree, toDelete);
 				printf("\n\t");
-				inOrder(tree->root);
+				inOrder(tree, tree->root);
 				printf("\n\t");
-				preOrder(tree->root);
+				preOrder(tree, tree->root);
 				printf("\n\t");
-				postOrder(tree->root);
+				postOrder(tree, tree->root);
 			}
 		}else{
 			printf("\tNode to be deleted not Found\n\n");
@@ -231,26 +257,41 @@ void removeNode(Tree * tree, Data data){
               b   c	-> PostOrder	[b c a] (left right root)
 
 */
-void inOrder(Node *node){
-	if(node != NULL){
-		inOrder(node->left);	
-		printf("%d ",node->data->num);
-		inOrder(node->right);
-	}	
+void inOrder(Tree *tree, Node *node){
+	if(tree->root!=NULL){
+		if(node != NULL){
+			inOrder(tree, node->left);
+			if(tree->root == node)
+				printf("<%d> ",node->data->num);
+			else	
+				printf("%d ",node->data->num);
+			inOrder(tree, node->right);
+		}	
+	}
 }
-void preOrder(Node *node){
-	if(node!=NULL){
-		printf("%d ",node->data->num);
-		preOrder(node->left);
-		preOrder(node->right);
-	}	
+void preOrder(Tree *tree, Node *node){
+	if(tree->root!=NULL){
+		if(node!=NULL){
+			if(tree->root == node)
+				printf("<%d> ",node->data->num);
+			else	
+				printf("%d ",node->data->num);
+			preOrder(tree, node->left);
+			preOrder(tree, node->right);
+		}	
+	}
 }
-void postOrder(Node *node){
-   	if(node != NULL){
-		postOrder(node->left);
-		postOrder(node->right);
-	   	printf("%d ", node->data->num);
-   	}
+void postOrder(Tree *tree, Node *node){
+	if(tree->root!=NULL){
+	   	if(node != NULL){
+			postOrder(tree, node->left);
+			postOrder(tree, node->right);
+			if(tree->root == node)
+				printf("<%d> ",node->data->num);
+			else	
+			   	printf("%d ", node->data->num);
+	   	}
+	}
 }
 
 //Delete Tree Functionalities
@@ -268,7 +309,12 @@ void* postOrderDelete(Node *node){
 	return NULL;
 }
 void* deleteTree(Tree *tree){
-	tree->root = postOrderDelete(tree->root);
-	free(tree);
+	if(tree!=NULL){
+		if(tree->root!= NULL){
+			tree->root = postOrderDelete(tree->root);
+		}
+		free(tree);
+		tree = NULL;
+	}
 	return NULL;	
 }

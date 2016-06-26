@@ -64,7 +64,8 @@ int main(){
 
                 if(input.num!= 0 && input.num!=-1 ){
                         printf("\n\tDeleting Data value %d from Tree\n", input.num);
-			removeNode(tree, input);
+			if(tree->root!= NULL)
+				removeNode(tree, input);
                 }
 
                 if(input.num == -1){
@@ -74,16 +75,18 @@ int main(){
 
 #endif
 	
+/*
 	//Print Test
 	printf("\tPreOrder\n\t");
-	preOrder(tree->root);
+	preOrder(tree, tree->root);
 	printf("\n\tInOrder\n\t");
-	inOrder(tree->root);
+	inOrder(tree, tree->root);
 	printf("\n\tPostOrder\n\t");
-	postOrder(tree->root);
+	postOrder(tree, tree->root);
 	printf("\n");
-
-	tree = deleteTree(tree);
+*/
+	if(tree!=NULL) 
+		tree = deleteTree(tree);
 	
 #endif
 	return 0;
