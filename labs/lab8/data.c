@@ -1,9 +1,9 @@
 #include "data.h"
 #include<stdlib.h>
 
-Data* initData(int num){
+Data* initData(City *city){
 	Data *data = malloc(sizeof(Data));
-	data->num = num;
+	data->city = city;
 	return data;
 }
 

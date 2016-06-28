@@ -1,11 +1,13 @@
 #ifndef DATA_H
 #define DATA_H
 
+#include "city.h"
+
 typedef struct data{
-	int num;
+	City *city;
 } Data;
 
-Data * initData(int);
+Data * initData(City * );
 void * deleteData(Data *);
 
 #endif
