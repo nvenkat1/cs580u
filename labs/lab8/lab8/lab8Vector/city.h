@@ -9,6 +9,7 @@ typedef struct city{
 	int x, y;
 	struct list *adjList;
 	int visited;
+	struct edge * edge;
 }City;
 
 struct edge{
