@@ -12,6 +12,7 @@ Vector * createVector(){
 	(*v).capacity = 0;
 	return v;
 }
+/*
 void vectorInsert(Vector *v, int index, Data dataIn){
 
 	if(index >= (*v).capacity){
@@ -38,13 +39,14 @@ void vectorInsert(Vector *v, int index, Data dataIn){
 	}else{
 		//(*v).current_size++;
 	}
-	v->data[index] = dataIn;
+	//v->data[index] = dataIn;
+	(*v).data[index] = dataIn;
 	(*v).current_size = index+  1;
 	//(*v).current_size++;
 
 
 }
-
+*/
 Data* vectorRead(Vector *v, int index){
 	if(index < 0) 
 		fprintf(stderr, "Invalid Index\n");
@@ -82,7 +84,7 @@ void * deleteVector(Vector *v){
 	free(v);
 	return NULL;
 }
-
+/*
 void vectorInsert2(Vector *v, int index, Data dataIn){
 
         if(index >= (*v).capacity){
@@ -105,7 +107,7 @@ void vectorInsert2(Vector *v, int index, Data dataIn){
         //(*v).current_size++;
 
 }
-
+*/
 void vectorInsert3(Vector *v, int index, Data dataIn){
 	if(index >= (*v).capacity){
 		if((*v).capacity == 0){
@@ -122,6 +124,13 @@ void vectorInsert3(Vector *v, int index, Data dataIn){
 
 	}else{
 	}
-	v->data[index] = dataIn;
+	//v->data[index] = dataIn;
+	(*v).data[index] = *(initData(dataIn.city));
 	(*v).current_size = index+  1;
+}
+
+void printVector(Vector *v){
+	int i = 0;
+	for( i =0 ; i< (v->current_size) ; i++)
+		printf("\tName:%s, X=%d, Y=%d\n", v->data[i].city->name, v->data[i].city->x, v->data[i].city->y);
 }

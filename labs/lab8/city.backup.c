@@ -69,11 +69,7 @@ void setAdjacent(Vector *v){
                                                         }else if(SWeight < weight){ //if old weight is less, do nothing
                                                                 continue;
                                                         }else{//Means new weight is less, remove old.
-								if(SIndex == index){
-                                                        	        int result = removeData(city->adjList, -1);
-								}else{
-                                                        	        int result = removeData(city->adjList, SIndex);
-								}
+                                                                int result = removeData(city->adjList, SIndex);
                                                                 index--;
                                                                 insertData(city->adjList, SIndex, v->data[j]);
                                                                 createEdge(city->adjList, SIndex, v->data[j], weight);
@@ -92,11 +88,7 @@ void setAdjacent(Vector *v){
                                                         }else if(NWeight < weight){ //if old weight is less, do nothing
                                                                 continue;
                                                         }else{//Means new weight is less, remove old.
-								if(SIndex == index){
-                                                        	        int result = removeData(city->adjList, -1);
-								}else{
-	                                                                int result = removeData(city->adjList, NIndex);
-								}
+                                                                int result = removeData(city->adjList, NIndex);
                                                                 index--;
                                                                 insertData(city->adjList, NIndex, v->data[j]);
                                                                 createEdge(city->adjList, NIndex, v->data[j], weight);
@@ -107,6 +99,21 @@ void setAdjacent(Vector *v){
                                                         }
                                                 }
 
+						/*if(multipleVertexOnYAxisFlag == 0){
+							if(cachedWeightYAxis < weight){
+								continue;
+							}else{//if current weight is less, remove previous one.
+                                                                int result = removeData(city->adjList, storedYIndex);
+								index--;
+                                                        }
+						}
+						insertData(city->adjList, index, v->data[j]);
+						createEdge(city->adjList, index, v->data[j], weight);
+						//v->data[j].weight = weight ;
+						multipleVertexOnYAxisFlag = 0;
+						cachedWeightYAxis = weight;
+						storedYIndex = index;
+						index++;*/
 					}else if(Ay==By){
 						weight = abs(Ax-Bx);
 						if(Ax>Bx){// B is on West of A
@@ -119,11 +126,7 @@ void setAdjacent(Vector *v){
 							}else if(WWeight < weight){ //if old weight is less, do nothing
 								continue;
 							}else{//Means new weight is less, remove old.
-								if(SIndex == index){
-                                                        	        int result = removeData(city->adjList, -1);
-								}else{
-									int result = removeData(city->adjList, WIndex);
-								}
+								int result = removeData(city->adjList, WIndex);
 								index--;
 								insertData(city->adjList, WIndex, v->data[j]);
 								createEdge(city->adjList, WIndex, v->data[j], weight);
@@ -142,12 +145,8 @@ void setAdjacent(Vector *v){
                                                         }else if(EWeight < weight){ //if old weight is less, do nothing
                                                                 continue;
                                                         }else{//Means new weight is less, remove old.
-								if(SIndex == index){
-                                                        	        int result = removeData(city->adjList, -1);
-								}else{
-	                                                                int result = removeData(city->adjList, EIndex);
-                                                                }
-								index--;
+                                                                int result = removeData(city->adjList, EIndex);
+                                                                index--;
                                                                 insertData(city->adjList, EIndex, v->data[j]);
                                                                 createEdge(city->adjList, EIndex, v->data[j], weight);
                                                                 EIndex = index; EWeight = weight;
@@ -156,6 +155,23 @@ void setAdjacent(Vector *v){
 
                                                         }
 						}
+						/*
+						if(multipleVertexOnXAxisFlag == 0){
+							if(cachedWeightXAxis < weight){
+								continue;
+							}else{//if current weight is less, remove previous one.
+								int result = removeData(city->adjList, storedXIndex);
+							}
+						}
+
+						insertData(city->adjList, index, v->data[j]);
+						createEdge(city->adjList, index, v->data[j], weight);
+						//v->data[j].weight = weight ;
+						multipleVertexOnXAxisFlag = 0;
+						cachedWeightXAxis =  weight;
+						storedXIndex = index;
+						index++;
+						*/
 					}
 				}
 			}
