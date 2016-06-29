@@ -12,13 +12,14 @@ Map * createMap(char * filename){
 
 	char cityName[255] = {0};
 	FILE * fptr = fopen(filename, "r");
-	int *x=NULL, *y=NULL, i = 0;
+	//int *x=NULL, *y=NULL, i = 0;
+	int x, y;
 
 	Data data;
 
 	int index = 1;
-	while( fscanf(fptr, "%s %d %d", cityName, x, y)!= EOF){
-		City *city = createCity(cityName, *x, *y);
+	while( fscanf(fptr, "%s %d %d", cityName, &x, &y)!= EOF){
+		City *city = createCity(cityName, x, y);
 		data.city = city;
 		//insertData(cityList, index, data);
 
