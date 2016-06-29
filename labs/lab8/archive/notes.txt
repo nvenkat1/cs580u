@@ -1,0 +1,87 @@
+(gdb) p cityList
+No symbol "cityList" in current context.
+(gdb) n
+20              while( fscanf(fptr, "%s %d %d", cityName, &x, &y)!= EOF){
+(gdb) n
+21                      City *city = createCity(cityName, x, y);
+(gdb) p map
+$3 = (Map *) 0x8a9010
+(gdb) p *map
+$4 = {cityList = 0x8a9030}
+(gdb) p (*map).cityList
+$5 = (List *) 0x8a9030
+(gdb) p (*(*map).cityList)
+$6 = {head = 0x8a93b0, tail = 0x8a9510}
+(gdb) p (*(*map).cityList).head
+$7 = (struct node *) 0x8a93b0
+(gdb) p (*(*(*map).cityList).head)
+$8 = {value = 0x8a93d0, next = 0x8a9510, prev = 0x0}
+(gdb) p (*(*(*map).cityList).head).value
+$9 = (struct data *) 0x8a93d0
+(gdb) p (*(*(*(*map).cityList).head).value).name
+There is no member named name.
+(gdb) p (*(*(*(*map).cityList).head).value)
+$10 = {city = 0x8a9290}
+(gdb) p (*(*(*(*map).cityList).head).value).city
+$11 = (struct city *) 0x8a9290
+(gdb) p (*(*(*(*(*map).cityList).head).value).city)
+$12 = {name = "attilan", '\000' <repeats 247 times>, x = 6, y = 7, adjList = 0x0}
+(gdb) p (*(*(*(*(*map).cityList).head).value).city).name
+$13 = "attilan", '\000' <repeats 247 times>
+(gdb) p map->cityList->head->value->city->name
+$14 = "attilan", '\000' <repeats 247 times>
+(gdb) n
+22                      data.city = city;
+(gdb) n
+23                      insertData(map->cityList, index, data);
+(gdb) n
+24                      index++;
+(gdb) n
+20              while( fscanf(fptr, "%s %d %d", cityName, &x, &y)!= EOF){
+(gdb) n
+21                      City *city = createCity(cityName, x, y);
+(gdb) n
+22                      data.city = city;
+(gdb) n
+23                      insertData(map->cityList, index, data);
+(gdb) p map->cityList->head->value->city->name
+$15 = "attilan", '\000' <repeats 247 times>
+(gdb) p map->cityList->head->next->value->city->name
+$16 = "wakanda", '\000' <repeats 247 times>
+(gdb) p map->cityList->head->next->next->value->city->name
+$17 = "doomstadt", '\000' <repeats 245 times>
+(gdb) p map->cityList->head->next->next->next->value->city->name
+Cannot access memory at address 0x0
+(gdb) n
+24                      index++;
+(gdb) p map->cityList->head->next->next->next->value->city->name
+$18 = "madripoor", '\000' <repeats 245 times>
+(gdb) n
+20              while( fscanf(fptr, "%s %d %d", cityName, &x, &y)!= EOF){
+(gdb) n
+21                      City *city = createCity(cityName, x, y);
+(gdb) n
+22                      data.city = city;
+(gdb) n
+23                      insertData(map->cityList, index, data);
+(gdb) n
+24                      index++;
+(gdb) p map->cityList->head->next->next->next->value->city->name
+$19 = "madripoor", '\000' <repeats 245 times>
+(gdb) p map->cityList->head->next->next->next->next->value->city->name
+$20 = "kun-lun", '\000' <repeats 247 times>
+(gdb) n
+20              while( fscanf(fptr, "%s %d %d", cityName, &x, &y)!= EOF){
+(gdb) n
+21                      City *city = createCity(cityName, x, y);
+(gdb) n
+22                      data.city = city;
+(gdb) n
+23                      insertData(map->cityList, index, data);
+(gdb) n
+24                      index++;
+(gdb) n
+20              while( fscanf(fptr, "%s %d %d", cityName, &x, &y)!= EOF){
+(gdb) p map->cityList->head->next->next->next->next->next->value->city->name
+$21 = "gotham", '\000' <repeats 248 times>
+(gdb)
