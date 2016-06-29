@@ -5,6 +5,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include <unistd.h>
+#include<string.h>
 
 Map * createMap(char * filename){
 	Map *map = malloc(sizeof(Map));
@@ -14,12 +15,20 @@ Map * createMap(char * filename){
 	char cityName[255] = {0};
 	FILE * fptr = fopen(filename, "r");
 
-	Data data;
+	//Data data;
 
 	int index = 1;
 	while( fscanf(fptr, "%s %d %d", cityName, &x, &y)!= EOF){
-		City *city = createCity(cityName, x, y);
-		data.city = city;
+		//City *city = createCity(cityName, x, y);
+		//data.city = city;
+		City city;
+		strcpy(city.name,cityName);
+		city.x = x;
+		city.y = y;
+
+		Data data;
+		data.city = &city;
+
 		insertData(map->cityList, index, data);
 		index++;
 	}
