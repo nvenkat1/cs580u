@@ -37,61 +37,132 @@ void setAdjacent(Vector *v){
 		int multipleVertexOnXAxisFlag = -1, cachedWeightXAxis = -1;	//MVFF=-1 (initial) =0 (set when 1Vertex), =1(Multiple Found)
 		int multipleVertexOnYAxisFlag = -1, cachedWeightYAxis = -1;	//MVFF=-1 (initial) =0 (set when 1Vertex), =1(Multiple Found)
 		int storedXIndex = -1, storedYIndex = -1;				//store this index b/c if in future less weight found, delete node at this stored index.
+		int N=0, S=0, E=0, W=0, NIndex=-1, SIndex=-1, EIndex=-1, WIndex=-1;
+		int NWeight=-1, SWeight=-1, EWeight=-1, WWeight=-1;
+
+
 		City *city = v->data[i].city;
 		city->adjList = createList();
 		insertData(city->adjList, index, v->data[i]);
 		createEdge(city->adjList, index, v->data[i], 0);
+		//v->data[i].weight = 0;
 		index++;
 
-		for(j=i; j < (v->current_size) ; j++){
+		for(j=0; j < (v->current_size) ; j++){
 			//printf("%d%d\n",i,j);
 			if(i!=j){
 				//Are they in  horizontal or vertical line?
-				int Ax = v->data[i].city->x;	int Ay = v->data[i].city->y;
-				int Bx = v->data[j].city->x; 	int By = v->data[j].city->y;
+				int Ax = v->data[i].city->x; 	int Bx = v->data[j].city->x;
+				int Ay = v->data[i].city->y; 	int By = v->data[j].city->y;
 				if(Ax==Bx || Ay==By){ 	//There is a path
 					int weight;
 					//check if shorted path available
 					if(Ax==Bx){
 						weight = abs(Ay-By);
+						if(Ay>By){// B is South to A
+                                                        if(S==0){ //if South side not has been added add one edge.
+                                                                insertData(city->adjList, index, v->data[j]);
+                                                                createEdge(city->adjList, index, v->data[j], weight);
+                                                                SIndex = index; SWeight = weight;
+                                                                index++;
+                                                                S = 1;
+                                                        }else if(SWeight < weight){ //if old weight is less, do nothing
+                                                                continue;
+                                                        }else{//Means new weight is less, remove old.
+								if(SIndex == index){
+                                                        	        int result = removeData(city->adjList, -1);
+								}else{
+                                                        	        int result = removeData(city->adjList, SIndex);
+								}
+                                                                index--;
+                                                                insertData(city->adjList, SIndex, v->data[j]);
+                                                                createEdge(city->adjList, SIndex, v->data[j], weight);
+                                                                SIndex = index; SWeight = weight;
+                                                                index++;
+                                                                S = 1;
 
-						if(multipleVertexOnYAxisFlag == 0){
-							if(cachedWeightYAxis < weight){
-								continue;
-							}else{//if current weight is less, remove previous one.
-                                                                int result = removeData(city->adjList, storedYIndex);
-								index--;
                                                         }
-						}
-						insertData(city->adjList, index, v->data[j]);
-						createEdge(city->adjList, index, v->data[j], weight);
-						multipleVertexOnYAxisFlag = 0;
-						cachedWeightYAxis = weight;
-						storedYIndex = index;
-						index++;
+                                                }else{//B is on North of A
+                                                        if(N==0){ //if North side not has been added add one edge.
+                                                                insertData(city->adjList, index, v->data[j]);
+                                                                createEdge(city->adjList, index, v->data[j], weight);
+                                                                NIndex = index; NWeight = weight;
+                                                                index++;
+                                                                N = 1;
+                                                        }else if(NWeight < weight){ //if old weight is less, do nothing
+                                                                continue;
+                                                        }else{//Means new weight is less, remove old.
+								if(SIndex == index){
+                                                        	        int result = removeData(city->adjList, -1);
+								}else{
+	                                                                int result = removeData(city->adjList, NIndex);
+								}
+                                                                index--;
+                                                                insertData(city->adjList, NIndex, v->data[j]);
+                                                                createEdge(city->adjList, NIndex, v->data[j], weight);
+                                                                NIndex = index; NWeight = weight;
+                                                                index++;
+                                                                N = 1;
+
+                                                        }
+                                                }
+
 					}else if(Ay==By){
 						weight = abs(Ax-Bx);
-
-						if(multipleVertexOnXAxisFlag == 0){
-							if(cachedWeightXAxis < weight){
+						if(Ax>Bx){// B is on West of A
+							if(W==0){ //if West side not has been added add one edge.
+								insertData(city->adjList, index, v->data[j]);
+								createEdge(city->adjList, index, v->data[j], weight);
+								WIndex = index; WWeight = weight;
+								index++;
+								W = 1;
+							}else if(WWeight < weight){ //if old weight is less, do nothing
 								continue;
-							}else{//if current weight is less, remove previous one.
-								int result = removeData(city->adjList, storedXIndex);
-							}
-						}
+							}else{//Means new weight is less, remove old.
+								if(SIndex == index){
+                                                        	        int result = removeData(city->adjList, -1);
+								}else{
+									int result = removeData(city->adjList, WIndex);
+								}
+								index--;
+								insertData(city->adjList, WIndex, v->data[j]);
+								createEdge(city->adjList, WIndex, v->data[j], weight);
+								WIndex = index; WWeight = weight;
+								index++;
+								W = 1;
 
-						insertData(city->adjList, index, v->data[j]);
-						createEdge(city->adjList, index, v->data[j], weight);
-						multipleVertexOnXAxisFlag = 0;
-						cachedWeightXAxis =  weight;
-						storedXIndex = index;
-						index++;
+							}
+						}else{//B is on East of A
+							if(E==0){ //if West side not has been added add one edge.
+                                                                insertData(city->adjList, index, v->data[j]);
+                                                                createEdge(city->adjList, index, v->data[j], weight);
+                                                                EIndex = index; EWeight = weight;
+                                                                index++;
+                                                                E = 1;
+                                                        }else if(EWeight < weight){ //if old weight is less, do nothing
+                                                                continue;
+                                                        }else{//Means new weight is less, remove old.
+								if(SIndex == index){
+                                                        	        int result = removeData(city->adjList, -1);
+								}else{
+	                                                                int result = removeData(city->adjList, EIndex);
+                                                                }
+								index--;
+                                                                insertData(city->adjList, EIndex, v->data[j]);
+                                                                createEdge(city->adjList, EIndex, v->data[j], weight);
+                                                                EIndex = index; EWeight = weight;
+                                                                index++;
+                                                                E = 1;
+
+                                                        }
+						}
 					}
 				}
 			}
 		}//For J
 		multipleVertexOnYAxisFlag = multipleVertexOnXAxisFlag = -1;
 		cachedWeightYAxis = cachedWeightXAxis = -1;
+		index=1;
 	}//For I
 }
 

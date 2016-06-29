@@ -5,6 +5,7 @@
 
 typedef struct data{
 	struct city *city;
+	//int weight;
 } Data;
 
 Data * initData(struct city * );

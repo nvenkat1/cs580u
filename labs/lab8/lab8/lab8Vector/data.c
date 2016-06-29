@@ -5,6 +5,7 @@
 Data* initData(City *city){
 	Data *data = malloc(sizeof(Data));
 	data->city = createCity(city->name, city->x, city->y);
+	//data->weight = -1;
 	return data;
 }
 

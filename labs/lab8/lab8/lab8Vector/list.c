@@ -65,7 +65,7 @@ void printList(List *list){
 	int i = 0;
         while(node!=NULL){
                 //printf("[%s]->", *(node->data->city).name));
-                printf("[name=%-12s, x=%d, y=%d]->", node->data->city->name, node->data->city->x, node->data->city->y);
+                printf("[name=%-12s, x=%d, y=%d, weight=%d]->", node->data->city->name, node->data->city->x, node->data->city->y, node->data->city->edge->weight);
                 node = node->next;
 		i++;
 		//if(i%4 == 0){ printf("\n\t"); }
@@ -171,7 +171,7 @@ int removeData(List * list, int index){
 			return 0;
 		}else{
 			int count = totalCount(list);
-			if(index > count){
+			if(index >= count){
 				printf("\tIndex is out of bound, Deleting last element\n");
 				Node * prevNode = list->tail->prev;
 				prevNode->next= NULL;
