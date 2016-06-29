@@ -12,6 +12,7 @@ Vector * createVector(){
 	(*v).capacity = 0;
 	return v;
 }
+/*
 void vectorInsert(Vector *v, int index, Data dataIn){
 
 	if(index >= (*v).capacity){
@@ -45,7 +46,7 @@ void vectorInsert(Vector *v, int index, Data dataIn){
 
 
 }
-
+*/
 Data* vectorRead(Vector *v, int index){
 	if(index < 0) 
 		fprintf(stderr, "Invalid Index\n");
@@ -83,7 +84,7 @@ void * deleteVector(Vector *v){
 	free(v);
 	return NULL;
 }
-
+/*
 void vectorInsert2(Vector *v, int index, Data dataIn){
 
         if(index >= (*v).capacity){
@@ -106,7 +107,7 @@ void vectorInsert2(Vector *v, int index, Data dataIn){
         //(*v).current_size++;
 
 }
-
+*/
 void vectorInsert3(Vector *v, int index, Data dataIn){
 	if(index >= (*v).capacity){
 		if((*v).capacity == 0){
