@@ -6,7 +6,7 @@
 Node * createNode(Data data){
 	Node * node = malloc(sizeof(Node));
 	//node->value = data;
-	node->value = initData(data.num);
+	node->value = initData(data.city);
 	node->next = NULL;
 	node->prev = NULL;
 	return node;
@@ -63,7 +63,7 @@ void printList(List *list){
 	Node * node = list->head;
 	printf("\t[Head]->");
         while(node!=NULL){
-                printf("[%d]->", *(node->value));
+                //printf("[%d]->", *(node->value));
                 node = node->next;
         }
 	printf("[Tail]\n");
@@ -76,7 +76,7 @@ void printListReverse(List *list){
         Node * node = list->tail;
         printf("\t[Tail]->");
         while(node!=NULL){
-                printf("[%d]->", *(node->value));
+                //printf("[%d]->", *(node->value));
                 node = node->prev;
         }
         printf("[Head]\n");
@@ -295,9 +295,9 @@ int searchForward(List * list, int num){
 	Node *node = list->head;
 	while(node->next!=NULL){
 		index++;
-		if( (*(*node).value).num == num){
-			return index;
-		}
+	//	if( (*(*node).value).num == num){
+	//		return index;
+	//	}
 		node = node->next;
 	}
 	return -1;
@@ -312,9 +312,9 @@ int searchBackward(List * list, int num){
         Node *node = list->tail;
         while(node->prev!=NULL){
                 index++;
-                if( (*(*node).value).num == num){
-                        return index;
-                }
+          //      if( (*(*node).value).num == num){
+           //             return index;
+           //     }
                 node = node->prev;
         }
         return -1;

@@ -17,16 +17,16 @@ typedef struct list{
 
 typedef struct node{
 	//Data value;
-	Data *value;
+	struct data *value;
 	struct node * next;
 	struct node * prev;
 }Node;
 
-Node * createNode(Data);
+Node * createNode(struct data);
 List * createList();
-void insertData(List * list, int index, Data value);
+void insertData(List * list, int index, struct data value);
 int removeData(List * list, int index);
-Data * readData(List * list, int index);
+struct data * readData(List * list, int index);
 int Empty(List * list);
 void printList(List *list);
 void printListReverse(List *list);

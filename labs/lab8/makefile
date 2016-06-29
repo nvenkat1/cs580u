@@ -2,7 +2,7 @@ P=lab8
 
 a:$(P)
 
-$(P):$(P).o list.o data.o city.o
+$(P):$(P).o map.o list.o data.o city.o
 	gcc -g $(P).o map.o list.o data.o city.o -o $(P)
 
 $(P).o:$(P).c map.h list.h city.h

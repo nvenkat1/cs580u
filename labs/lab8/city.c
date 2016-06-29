@@ -2,10 +2,12 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 City * createCity(char * cityNameIn, int xIn, int yIn){
 	City *city =  malloc(sizeof(City));
-	city->cityName = cityNameIn;
+	//city->name = cityNameIn;
+	strcpy(city->name, cityNameIn);
 	city->x = xIn;
 	city->y = yIn;
 	city->adjList = NULL;

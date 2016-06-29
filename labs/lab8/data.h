@@ -4,10 +4,10 @@
 #include "city.h"
 
 typedef struct data{
-	City *city;
+	struct city *city;
 } Data;
 
-Data * initData(City * );
+Data * initData(struct city * );
 void * deleteData(Data *);
 
 #endif
