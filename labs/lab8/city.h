@@ -1,16 +1,17 @@
 #ifndef CITY_H
 #define CITY_H
-
 #include "list.h"
-//#include "data.h"
 
 typedef struct city{
-	int x , y;
-	char * cityName;
-	List * adjList;
+	char name[255];
+	int x, y;
+	struct list *adjList;
 }City;
 
-City * createCity(char * cityName, int xCoor, int yCoor);
-List * getAdjacent(City *);
+
+struct city * createCity(char * cityNameIn, int xIn, int yIn);
+
+struct list * getAdjacent(City *city);
+
 
 #endif
