@@ -15,7 +15,8 @@ City * createCity(char * cityNameIn, int xIn, int yIn){
 }
 
 List * getAdjacent(City *city){
-	List *list;
+	List * list;
+
 	return list;
 }
 

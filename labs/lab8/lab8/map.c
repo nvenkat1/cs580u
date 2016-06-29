@@ -36,3 +36,12 @@ Map * createMap(char * filename){
 }
 City* findByName(Map * map, char * cityName){
 }
+
+void printMap(Map *map){
+	printList(map->cityList);
+}
+
+void * deleteMap(Map *map){
+	deleteList(map->cityList);
+	//freeList(map->cityList);
+}

@@ -13,6 +13,6 @@ typedef struct map{
 
 Map * createMap(char * filename);
 City* findByName(Map * map, char * cityName);
-
+void printMap(Map *);
 
 #endif

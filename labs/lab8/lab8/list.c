@@ -35,7 +35,6 @@ void insertData(List * list, int index, Data data){
 				node = node->next;
 				counter++;
 			}
-	//		printf("Counter=%d index=%d\n",counter,index);
 			if(index > counter){//meaning out of bound.. so add at the end.
 				Node *newNode = createNode(data);
 				node->next=newNode;
@@ -61,12 +60,16 @@ void printList(List *list){
 		return;
 	}
 	Node * node = list->head;
-	printf("\t[Head]->");
+	printf("\t[Head]->\n\t");
+	int i = 0;
         while(node!=NULL){
-                //printf("[%d]->", *(node->data));
+                //printf("[%s]->", *(node->data->city).name));
+                printf("[name=%s, x=%d, y=%d]->", node->data->city->name, node->data->city->x, node->data->city->y);
                 node = node->next;
+		i++;
+		if(i%4 == 0){ printf("\n\t"); }
         }
-	printf("[Tail]\n");
+	printf("\n\t->[Tail]\n");
 }
 void printListReverse(List *list){
 	if(list->head==NULL) {
@@ -77,6 +80,7 @@ void printListReverse(List *list){
         printf("\t[Tail]->");
         while(node!=NULL){
                 //printf("[%d]->", *(node->data));
+                printf("[name=%s, x=%d, y=%d]->", node->data->city->name, node->data->city->x, node->data->city->y);
                 node = node->prev;
         }
         printf("[Head]\n");
@@ -95,8 +99,6 @@ void freeNode(Node * node){
 	while(node!=NULL){
 		if(node->next != NULL){
 			tempNode = node->next;
-	//		tempNode = tempNode->next;
-			//free((*node).data);
 			deleteData((*node).data);
 			node->data = NULL;
 			node->next = NULL;
@@ -104,9 +106,7 @@ void freeNode(Node * node){
 			free(node);
 			node = NULL;
 			node = tempNode;
-			//node = node->next;
 		}else{
-			//free((*node).data);
 			deleteData((*node).data);
 			node->next = NULL;
 			node->prev = NULL;
@@ -120,26 +120,19 @@ int removeData(List * list, int index){
 		printf("\tList is Empty\n");
 		return 0;
 	}
-	//Deleting Tail
 	if(index == -1){
 		Node *node;
 		if(list->head->next == NULL){
 			printf("\t Only 1 element in List\n");
-			//free(list->head);	//commmented this 1	//-
-		//Added Later 2
 			deleteData( (*(*list).head).data );	 //+
                         (*(*list).head).data = NULL;		 //+
-		//
 			list->head = NULL;
 			list->tail = NULL;
-		//Added later 3
 			free(list);				 //+
 			list=NULL;				 //+
-		//
 			printf("\tList Emptied\n");
 			return 0;
 		}else{
-		//Added later 1
 			node = list->tail->prev;		//+
 			node->next = NULL;			//+
 			deleteData((*(*list).tail).data);	//+
@@ -148,42 +141,26 @@ int removeData(List * list, int index){
 			list->tail->prev = NULL;		//+
 			list->tail = NULL;			//+
 			list->tail = node;			//+
-		//
-		//OLD-Uncomment this if doenst work!
-		/*	list->tail->prev->next = NULL;
-			free(list->tail);
-			list->tail->next= NULL;
-			list->tail->prev= NULL; */
-		//
 			return 0;
 		}
 	}
-	//If we have only 1 element:
 	if(list->head->next == NULL){
 		printf("\t Only 1 element in List\n");
-	//Added Later
 		deleteData( (*(*list).head).data);  	//+
 		(*(*list).head).data = NULL;		//+
-	//
 		free(list->head);
 		list->head = NULL;
 		list->tail = NULL;
-	//Added Later
-		//free(list);				 //+
 		list=NULL;				 //+
-	//
 		printf("\tList Emptied\n");
 		return 0;
 	}else{
 		Node *node = list->head;
-		//Delete Head
 		if(index == 1){
 			node->next->prev = NULL;
 			list->head = node->next;
-			//Added Later
 			deleteData((*node).data);	  	//+
 			(*node).data = NULL;			//+
-			//
 			node->next = NULL;
 			node->prev = NULL;
 			free(node);
@@ -195,12 +172,10 @@ int removeData(List * list, int index){
 				printf("\tIndex is out of bound, Deleting last element\n");
 				Node * prevNode = list->tail->prev;
 				prevNode->next= NULL;
-		//Added later
  				deleteData((*(*list).tail).data);	//+
 				(*(*list).tail).data = NULL;		//+
 				list->tail->next = NULL;		//+
 				list->tail->prev = NULL;		//+
-		//
 
 				free(list->tail);
 				list->tail=NULL;
@@ -212,20 +187,15 @@ int removeData(List * list, int index){
 					node = node->next;
 					counter++;
 				}
-				//printf("c=%d I=%d\n",counter, index);
 				node->prev->next = node->next;
 				node->next->prev = node->prev;
-				//Added Later
+
 				deleteData((*node).data);	  	//+
 				(*node).data = NULL;			//+
 				node->next = NULL;
 				node->prev = NULL;
 				free(node);
 				node= NULL;
-				//
-				//free(node);
-//				node->next = NULL;
-//				node->prev = NULL;
 				return 0;
 			}
 		}
