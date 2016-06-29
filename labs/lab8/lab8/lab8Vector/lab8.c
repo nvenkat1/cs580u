@@ -8,5 +8,6 @@ int main(){
 	printMap(map);
 
 	setAdjacent(map->cityVector);
+	printAdjList(map->cityVector);
 	return 0;
 }
