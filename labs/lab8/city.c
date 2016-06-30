@@ -1,10 +1,12 @@
 #include "city.h"
 #include "vector.h"
 #include "list.h"
+#include "map.h"
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<limits.h>
 
 City * createCity(char * cityNameIn, int xIn, int yIn){
 	City *city =  malloc(sizeof(City));
@@ -166,11 +168,11 @@ void setAdjacent(Vector *v){
 	}//For I
 }
 
-List * getAdjacent(City *city){
-	city->adjList = malloc(sizeof(List));
 
-	return city->adjList;
-}
+//List * getAdjList(Data *data){
+//
+//	return city->adjList;
+//}
 
 void printAdjList(Vector *v){
 	int i = 0;
@@ -195,6 +197,7 @@ struct city * findByNameCity(Vector *v, char *cityName){
 	return v->data[i].city;
 }
 
+
 void deleteEdge(struct edge *edge){
 	free(edge);
 	edge->city = NULL;
@@ -212,3 +215,92 @@ void * deleteCity(City * city){
 	return NULL;
 
 }
+int findIndexOfCityInVector(Vector * v, City *start){
+	int i=0,index = -1;
+	for(i=0; i< (v->current_size); i++){
+		index++;
+		int result = strcmp(start->name, v->data[i].city->name);
+		//if(start == v->data[i].city)
+		if(result ==0)
+		break;
+	}
+	return index;
+}
+//void setDistance(Data *data, int *distance, int totalDistance){
+//	List *list = getAdjList(data);
+//}
+int findMinDistance(int *distance, int *visited){
+	int min = INT_MAX;
+	int index = -1, i=0;
+	for(i = 0; i< (sizeof(distance)/sizeof(int)); i++){
+		if(visited[i]==0){	//only non visted nodes =0 means non visted.
+			if(distance[i] < min){
+				min = distance[i];
+				index = i;
+			}
+		}
+	}
+	return index;
+}
+
+City * findClosestCity(Map *map,int *visited,int *distance, City *preOptimal, City *start, int indexOfStart, int visitedIndexCount){
+	Vector * v = map->cityVector;
+	Data *data = map->cityVector->data;
+
+	int i = 0;
+	for(i=0; i< (v->current_size); i++){
+	}
+	List *adjList = data[indexOfStart].city->adjList;
+	int sizeofAdjList = totalCount(adjList);
+	for (i=2; i <= sizeofAdjList; i++){
+		data = readData(adjList, i);
+		int index =  findIndexOfCityInVector(v, data->city);
+		distance[index] = data->city->edge->weight;
+		*(preOptimal + index) = *start;
+	}
+	visited[indexOfStart] = ++visitedIndexCount;
+
+	int minCityIndex = findMinDistance(distance, visited);
+	return (map->cityVector->data[minCityIndex].city);
+}
+
+List * shortestPath(Map * map, City * start, City * dest){
+	List * listPath = NULL;
+	int max = INT_MAX, vertexCount = 0;
+	//printf("\t%d\n", max);
+
+	vertexCount = map->cityVector->current_size;
+	//printf("\t%d\n", vertexCount);
+	int distance[vertexCount]; //11(0-10)
+	int visited[vertexCount];//11(0-10)
+	int vistedIndexCount=0;
+	//char preOptimal[vertexCount][255]={0};
+	City preOptimal[vertexCount];
+	memset( preOptimal, 0, vertexCount* sizeof(City) );
+
+	//Initialization
+	int i=0;
+	for(i=0;i<vertexCount; i++){
+		distance[i]=INT_MAX;
+		visited[i]=0;
+		//preOptimal[i]= {0};  char firstName[20]={0}
+	}
+	int indexOfStart = findIndexOfCityInVector(map->cityVector, start);
+	int indexOfDest = findIndexOfCityInVector(map->cityVector, dest);
+	int totalDistance = 0;
+	distance[indexOfStart]= 0;
+
+	//setDistance(map->cityVector->data, distance, totalDistance);
+	City *city = NULL;
+	int listIndex=1;
+	for(city = start; city == dest ; ){
+		City *closestCity =  findClosestCity(map, visited, distance, preOptimal, start, indexOfStart, vistedIndexCount);
+		Data data;
+		data.city = closestCity;
+		insertData(listPath, listIndex++, data);
+		city = closestCity;
+	}
+	return listPath;
+}
+
+
