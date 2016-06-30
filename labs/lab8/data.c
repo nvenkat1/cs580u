@@ -12,7 +12,6 @@ Data* initData(City *city){
 void* deleteData(Data *data){
 	data->city = deleteCity(data->city);
 	free(data);
-	data = NULL;
 	return NULL;
 }
 

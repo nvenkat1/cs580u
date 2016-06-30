@@ -80,7 +80,8 @@ void vectorRemove(Vector *v, int index){
 }
 
 void * deleteVector(Vector *v){
-	free((*v).data);
+	//free((*v).data);
+	v->data = deleteData(v->data);
 	free(v);
 	return NULL;
 }

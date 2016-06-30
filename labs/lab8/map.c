@@ -33,20 +33,19 @@ Map * createMap(char * filename){
 		vectorInsert3(map->cityVector, index, data);
 		index++;
 	}
+	setAdjacent(map->cityVector);
 	return map;
 }
 City* findByName(Map * map, char * cityName){
 }
 
 void printMap(Map *map){
-	printVector(map->cityVector);
-}
-
-/*void printMap(Map *map){
-	printList(map->cityList);
+	//printVector(map->cityVector);
+	printAdjList(map->cityVector);
 }
 
 void * deleteMap(Map *map){
-	deleteList(map->cityList);
-	//freeList(map->cityList);
-}*/
+	map->cityVector = deleteVector(map->cityVector);
+	free(map);
+	return NULL;
+}

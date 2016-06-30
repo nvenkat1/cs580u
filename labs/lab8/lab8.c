@@ -7,7 +7,5 @@ int main(){
 	Map *map = createMap("townlist2.txt");
 	printMap(map);
 
-	setAdjacent(map->cityVector);
-	printAdjList(map->cityVector);
 	return 0;
 }

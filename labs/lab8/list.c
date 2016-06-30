@@ -65,7 +65,7 @@ void printList(List *list){
 	int i = 0;
         while(node!=NULL){
                 //printf("[%s]->", *(node->data->city).name));
-                printf("[name=%-12s, x=%d, y=%d, weight=%d]->", node->data->city->name, node->data->city->x, node->data->city->y, node->data->city->edge->weight);
+                printf("[name=%-10s, x=%d, y=%d, weight=%d]->", node->data->city->name, node->data->city->x, node->data->city->y, node->data->city->edge->weight);
                 node = node->next;
 		i++;
 		//if(i%4 == 0){ printf("\n\t"); }
@@ -90,6 +90,7 @@ void printListReverse(List *list){
 }
 
 void * freeList(List *list){
+	if(list==NULL) return;
        	freeNode((*list).head);
 	list->head = NULL;
 	list->tail = NULL;
@@ -103,17 +104,17 @@ void freeNode(Node * node){
 		if(node->next != NULL){
 			tempNode = node->next;
 			deleteData((*node).data);
+			free(node);
 			node->data = NULL;
 			node->next = NULL;
 			node->prev = NULL;
-			free(node);
 			node = NULL;
 			node = tempNode;
 		}else{
 			deleteData((*node).data);
+			free(node);
 			node->next = NULL;
 			node->prev = NULL;
-			free(node);
 			node = NULL;
 		}
 	}
@@ -172,7 +173,7 @@ int removeData(List * list, int index){
 		}else{
 			int count = totalCount(list);
 			if(index >= count){
-				printf("\tIndex is out of bound, Deleting last element\n");
+				//printf("\tIndex is out of bound, Deleting last element\n");
 				Node * prevNode = list->tail->prev;
 				prevNode->next= NULL;
  				deleteData((*(*list).tail).data);	//+

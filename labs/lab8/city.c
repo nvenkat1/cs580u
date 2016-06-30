@@ -172,14 +172,6 @@ List * getAdjacent(City *city){
 	return city->adjList;
 }
 
-void * deleteCity(City * city){
-	//city.name= NULL;
-	//city.x = NULL;
-	//city.y = NULL;
-	//city.adjList = NULL;
-	free(city);
-	return NULL;
-}
 void printAdjList(Vector *v){
 	int i = 0;
 	for(i =0; i< (v->current_size); i++){
@@ -191,4 +183,22 @@ void printAdjList(Vector *v){
 		//}
 
 	}
+}
+
+void deleteEdge(struct edge *edge){
+	free(edge);
+	edge->city = NULL;
+	edge = NULL;
+}
+void * deleteCity(City * city){
+	deleteEdge(city->edge);
+	if(city->adjList !=NULL){
+		if(city->adjList->head != NULL)
+			city->adjList = freeList(city->adjList);
+	}
+	free(city);
+	city->adjList = NULL;
+	city->edge= NULL;
+	return NULL;
+
 }

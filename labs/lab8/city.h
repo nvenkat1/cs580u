@@ -22,6 +22,6 @@ void setAdjacent(Vector * );
 struct list * getAdjacent(City *city);
 
 void * deleteCity(struct city *);
-
+void deleteEdge(struct edge *);
 
 #endif
