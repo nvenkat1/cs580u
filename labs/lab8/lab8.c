@@ -9,7 +9,7 @@ int main(){
 
 	char *cityName;
 	printf("\n\tEnter City Name\n\t");
-	scanf("%s", cityName);
+	scanf("%12s", cityName);
 
 	City *city = findByName(map, cityName);
 	printf("\n\tCity name found: %s\n\t", city->name);
