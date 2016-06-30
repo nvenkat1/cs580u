@@ -65,14 +65,14 @@ void printList(List *list){
 	int i = 0;
         while(node!=NULL){
                 //printf("[%s]->", *(node->data->city).name));
-                printf("[name=%-10s, x=%d, y=%d, weight=%d]->", node->data->city->name, node->data->city->x, node->data->city->y, node->data->city->edge->weight);
+                printf("\n\t\t[name=%-10s, x=%d, y=%d, weight=%d]->", node->data->city->name, node->data->city->x, node->data->city->y, node->data->city->edge->weight);
                 node = node->next;
 		i++;
 		//if(i%4 == 0){ printf("\n\t"); }
 		//if(i%4 == 0){ printf("\n\t"); }
         }
 	//printf("\n\t->[Tail]\n");
-	printf("->[Tail]\n");
+	printf("\n\t\t->[Tail]\n\n");
 }
 void printListReverse(List *list){
 	if(list->head==NULL) {

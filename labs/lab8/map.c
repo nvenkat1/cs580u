@@ -37,6 +37,8 @@ Map * createMap(char * filename){
 	return map;
 }
 City* findByName(Map * map, char * cityName){
+	City *city = findByNameCity(map->cityVector, cityName);
+	return city;
 }
 
 void printMap(Map *map){

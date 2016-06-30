@@ -20,6 +20,7 @@ struct edge{
 struct city * createCity(char * cityNameIn, int xIn, int yIn);
 void setAdjacent(Vector * );
 struct list * getAdjacent(City *city);
+struct city * findByNameCity(Vector *v, char *cityName);
 
 void * deleteCity(struct city *);
 void deleteEdge(struct edge *);

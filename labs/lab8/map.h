@@ -12,7 +12,7 @@ typedef struct map{
 }Map;
 
 Map * createMap(char * filename);
-City* findByName(Map * map, char * cityName);
+struct city * findByName(Map * map, char * cityName);
 void printMap(Map *);
 
 #endif

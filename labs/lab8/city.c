@@ -185,6 +185,16 @@ void printAdjList(Vector *v){
 	}
 }
 
+struct city * findByNameCity(Vector *v, char *cityName){
+	int i = 0;
+	for(i=0; i < (v->current_size) ; i++){
+		int found = strcmp(cityName, v->data[i].city->name);
+		if(found ==0)
+			break;
+	}
+	return v->data[i].city;
+}
+
 void deleteEdge(struct edge *edge){
 	free(edge);
 	edge->city = NULL;
