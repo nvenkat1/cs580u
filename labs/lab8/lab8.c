@@ -7,7 +7,7 @@ int main(){
 	Map *map = createMap("townlist2.txt");
 	printMap(map);
 
-	char *cityName;
+	char *cityName = NULL;
 	printf("\n\tEnter City Name\n\t");
 	scanf("%12s", cityName);
 
