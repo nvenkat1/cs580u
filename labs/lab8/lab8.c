@@ -20,5 +20,8 @@ int main(){
 	shortestPathList = shortestPath(map, cityFrom, cityTo);
 	printShortestPathList(shortestPathList);
 
+
+	shortestPathList =freeList(shortestPathList);
+
 	return 0;
 }
