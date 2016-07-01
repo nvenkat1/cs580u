@@ -8,7 +8,7 @@ $(P):$(P).o map.o vector.o data.o city.o list.o
 $(P).o:$(P).c map.h vector.h city.h
 	gcc -g -c $(P).c
 
-map.o:map.c map.h vector.h city.h
+map.o:map.c map.h vector.h city.h data.h list.h
 	gcc -g -c map.c
 
 vector.o:vector.c vector.h data.h

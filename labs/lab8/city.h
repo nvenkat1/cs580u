@@ -21,9 +21,12 @@ struct city * createCity(char * cityNameIn, int xIn, int yIn);
 void setAdjacent(Vector * );
 struct list * getAdjacent(City *city);
 struct city * findByNameCity(Vector *v, char *cityName);
-
+void setAdjacent(Vector *v);
 void * deleteCity(struct city *);
 void deleteEdge(struct edge *);
 void bubbleSort(int *, int*, Vector *, int);
-
+void printAdjList(Vector *v);
+struct city * findByNameCity(Vector *v, char *cityName);
+int findIndexOfCityInVector(Vector * v, City *start);
+int findMinDistance(int *distance, int *visited);
 #endif

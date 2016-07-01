@@ -168,21 +168,12 @@ void setAdjacent(Vector *v){
 	}//For I
 }
 
-
-//List * getAdjList(Data *data){
-//
-//	return city->adjList;
-//}
-
 void printAdjList(Vector *v){
 	int i = 0;
 	for(i =0; i< (v->current_size); i++){
 		printf("%i.%s->", i+1,  v->data[i].city->name);
 
 		printList(v->data[i].city->adjList);
-		//Node *node =  v->data[i].city->adjList->head;
-		//while(node!=NULL){
-		//}
 
 	}
 }
@@ -192,9 +183,11 @@ struct city * findByNameCity(Vector *v, char *cityName){
 	for(i=0; i < (v->current_size) ; i++){
 		int found = strcmp(cityName, v->data[i].city->name);
 		if(found ==0)
-			break;
+			return v->data[i].city;
+			//break;
 	}
-	return v->data[i].city;
+	printf("\n\tInvalid name Entered!\n");
+	return NULL;
 }
 
 
@@ -226,9 +219,14 @@ int findIndexOfCityInVector(Vector * v, City *start){
 	}
 	return index;
 }
-//void setDistance(Data *data, int *distance, int totalDistance){
-//	List *list = getAdjList(data);
-//}
+/*
+char * getNamefromIndex(int parent, Vector *v){
+	int i=0;
+	for(i=0; i< (v->current_size); i++){
+		if(parent[i]
+	}
+}
+*/
 int findMinDistance(int *distance, int *visited){
 	int min = INT_MAX;
 	int index = -1, i=0;
@@ -323,6 +321,11 @@ List * shortestPath(Map * map, City * start, City * dest){
 	city = start;
 	int nullCheckCount = 0;
 	while(city!= dest){
+		if(nullCheckCount >=9){
+			printf("\n\tCan not reach destination City\n");
+			return NULL;
+			//exit(0);
+		}
 		City *closestCity =  findClosestCity(map, visited, distance, parent, city, currentStart, ++visitedIndexCount, sourceWeight, indexOfDest);
 		currentStart = findIndexOfCityInVector(map->cityVector, closestCity);
 		sourceWeight = distance[currentStart];
@@ -331,12 +334,12 @@ List * shortestPath(Map * map, City * start, City * dest){
 		city = closestCity;
 		nullCheckCount++;
 	}
-	for(i=0; i<vertexCount;i++){
+	/*for(i=0; i<vertexCount;i++){
 		if(visited[i]!=0){
 			printf("\tVisited  Distance  Parent\n");
 			printf("\t%-9d%-10d%-10s\n", visited[i], distance[i], map->cityVector->data[i].city->name);
 		}
-	}
+	}*/
 	bubbleSort(distance, visited, map->cityVector, vertexCount);
 	return listPath;	//TODO: disallocate this!!!!!
 }
@@ -360,12 +363,20 @@ void bubbleSort(int * distance, int * visited, Vector *v, int vertexCount){
 	      }
 	    }
 	}
-	printf("\n\n");
+	printf("\n\n\tPrinting in sorted!\n\n");
+	int flag =0;
 	for(i=0; i<vertexCount;i++){
 		if(visited[i]!=0){
-			printf("\tVisited  Distance  Parent\n");
-			printf("\t%-10d%-10d%-10s\n", visited[i], distance[i], v->data[i].city->name);
+			if(flag == 0){
+				//printf("\tVisited  Distance    Parent\n");
+				printf("\tVisited  Parent      Distance\n");
+				flag = 1;
+			}
+			//printf("\t%-10d%-10d%-10s\n", visited[i], distance[i], v->data[i].city->name);
+
+			printf("\t%-9d%-12s%-2d\n", visited[i], v->data[i].city->name, distance[i]);
 		}
 	}
+	printf("\n\n");
 
 }

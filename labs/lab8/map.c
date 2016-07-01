@@ -39,6 +39,10 @@ Map * createMap(char * filename){
 }
 City* findByName(Map * map, char * cityName){
 	City *city = findByNameCity(map->cityVector, cityName);
+	if(city==NULL){
+		printf("\n\tInvalid Name Entered!\n");
+		return NULL;
+	}
 	return city;
 }
 
