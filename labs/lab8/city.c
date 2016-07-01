@@ -259,7 +259,7 @@ City * findClosestCity(Map *map,int *visited,int *distance, int *parent, City *s
 	int destFound = 0;
 
 	//STEP1 : COPY ALL PREVIOUS VALUES OF DISTANCES if only visited
-	copyPreviousDistance(distance, visited);
+	//copyPreviousDistance(distance, visited);
 
 	//STEP2: FIND ADJACENT NODES
 	List *adjList = data[indexOfStart].city->adjList;
@@ -280,18 +280,12 @@ City * findClosestCity(Map *map,int *visited,int *distance, int *parent, City *s
 				}
 			}
 		}
-		//if(visited[index]==0){	//Dont update distance table at already visited index.
-		//	sourceWeight = sourceWeight + data->city->edge->weight;
-		//	distance[index] = sourceWeight;
-		//	parent[index] = findIndexOfCityInVector(v, start);
-		//}
 	}
 	//STEP4: FIND MINIMUM AMOUNT ALL EDGES | SCAN IN DISTANCE ARRAY
-
 	if( destFound == 1){
 		int minCityIndex = indexOfDest;
 		visited[minCityIndex] = visitedIndexCount;
-		copyPreviousDistance(distance, visited);
+		//copyPreviousDistance(distance, visited);
 		return (map->cityVector->data[minCityIndex].city);
 	}
 	int minCityIndex = findMinDistance(distance, visited);
@@ -327,6 +321,7 @@ List * shortestPath(Map * map, City * start, City * dest){
 	int listIndex=1;
 	insertData(listPath, listIndex++, data);
 	city = start;
+	int nullCheckCount = 0;
 	while(city!= dest){
 		City *closestCity =  findClosestCity(map, visited, distance, parent, city, currentStart, ++visitedIndexCount, sourceWeight, indexOfDest);
 		currentStart = findIndexOfCityInVector(map->cityVector, closestCity);
@@ -334,6 +329,7 @@ List * shortestPath(Map * map, City * start, City * dest){
 		data.city = closestCity;
 		insertData(listPath, listIndex++, data);
 		city = closestCity;
+		nullCheckCount++;
 	}
 	for(i=0; i<vertexCount;i++){
 		if(visited[i]!=0){
@@ -341,7 +337,35 @@ List * shortestPath(Map * map, City * start, City * dest){
 			printf("\t%-9d%-10d%-10s\n", visited[i], distance[i], map->cityVector->data[i].city->name);
 		}
 	}
+	bubbleSort(distance, visited, map->cityVector, vertexCount);
 	return listPath;	//TODO: disallocate this!!!!!
 }
 
+void bubbleSort(int * distance, int * visited, Vector *v, int vertexCount){
+	int i = 0 , j = 0, n = 0, swap, swap1, swap2;
+	Data data;
+	for (i=0; i<(vertexCount-1); i++){
+	    for (j=0 ; j<(vertexCount-i-1); j++){
+	      if (visited[j] > visited[j+1]){ /* For decreasing order use < */
+			swap = visited[j];
+			swap1 = distance[j];
+			data = v->data[j];
+		        visited[j]   = visited[j+1];
+		        distance[j]   = distance[j+1];
+		        v->data[j]   = v->data[j+1];
 
+		        visited[j+1] = swap;
+		        distance[j+1] = swap1;
+		        v->data[j+1] = data;
+	      }
+	    }
+	}
+	printf("\n\n");
+	for(i=0; i<vertexCount;i++){
+		if(visited[i]!=0){
+			printf("\tVisited  Distance  Parent\n");
+			printf("\t%-10d%-10d%-10s\n", visited[i], distance[i], v->data[i].city->name);
+		}
+	}
+
+}

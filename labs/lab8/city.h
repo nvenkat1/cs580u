@@ -24,5 +24,6 @@ struct city * findByNameCity(Vector *v, char *cityName);
 
 void * deleteCity(struct city *);
 void deleteEdge(struct edge *);
+void bubbleSort(int *, int*, Vector *, int);
 
 #endif
