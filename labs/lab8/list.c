@@ -113,8 +113,8 @@ void freeNode(Node * node){
 		}else{
 			deleteData((*node).data);
 			free(node);
-			node->next = NULL;
-			node->prev = NULL;
+			//node->next = NULL;
+			//node->prev = NULL;
 			node = NULL;
 		}
 	}
@@ -295,13 +295,14 @@ int searchBackward(List * list, int num){
 }
 //Added later
 //function to deallcoate sapace allocated to node
-void deleteNode(Node * node){
+void * deleteNode(Node * node){
 	deleteData(node->data);
 	free(node);
+	return NULL;
 }
 
 //function to delete list.
-void deleteList(List * list){
+void *deleteList(List * list){
 	Node * iterator = list -> head;
 
 	Node * prev = NULL;
@@ -309,9 +310,10 @@ void deleteList(List * list){
 	while(iterator!= NULL){
 		prev = iterator;
 		iterator = iterator -> next;
-		deleteNode(prev);
+		prev = deleteNode(prev);
 	}
 	free(list);
+	return NULL;
 }
 void printShortestPathList(List *list){
         if(list ==  NULL) return;

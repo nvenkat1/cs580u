@@ -192,21 +192,24 @@ struct city * findByNameCity(Vector *v, char *cityName){
 
 
 void deleteEdge(struct edge *edge){
-	free(edge);
+	if(edge!=NULL)
+		free(edge);
 	//edge->city = NULL;
 	edge = NULL;
 }
 void * deleteCity(City * city){
 	deleteEdge(city->edge);
 	if(city->adjList !=NULL){
-		if(city->adjList->head != NULL)
+		if(city->adjList->head != NULL){
 			//city->adjList = freeList(city->adjList);
 			//if(city->adjList !=NULL)
 				deleteList(city->adjList);
+		}
 	}
-	free(city);
-	city->adjList = NULL;
-	city->edge= NULL;
+	if(city!=NULL)
+		free(city);
+	//city->adjList = NULL;
+	//city->edge= NULL;
 	return NULL;
 
 }
@@ -347,7 +350,7 @@ List * shortestPath(Map * map, City * start, City * dest){
 }
 
 void bubbleSort(int * distance, int * visited, Vector *v, int vertexCount){
-	int i = 0 , j = 0, n = 0, swap, swap1, swap2;
+	int i = 0 , j = 0, n = 0, swap=0, swap1=0, swap2=0;
 	Data data;
 	for (i=0; i<(vertexCount-1); i++){
 	    for (j=0 ; j<(vertexCount-i-1); j++){

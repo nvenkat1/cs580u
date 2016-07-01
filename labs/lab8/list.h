@@ -36,7 +36,7 @@ int totalCount(List *list);
 int searchForward(List *list, int num);
 int searchBackward(List *list, int num);
 
-void deleteNode(Node * node);
-void deleteList(List * list);
+void *deleteNode(Node * node);
+void *deleteList(List * list);
 
 #endif
