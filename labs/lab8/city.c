@@ -232,7 +232,8 @@ int findIndexOfCityInVector(Vector * v, City *start){
 int findMinDistance(int *distance, int *visited){
 	int min = INT_MAX;
 	int index = -1, i=0;
-	for(i = 0; i< (sizeof(distance)/sizeof(int)); i++){
+	//for(i = 0; i< (sizeof(distance)/sizeof(int)); i++){
+	for(i = 0; i< 11; i++){
 		if(visited[i]==0){	//only non visted nodes =0 means non visted.
 			if(distance[i] < min){
 				min = distance[i];
@@ -242,65 +243,86 @@ int findMinDistance(int *distance, int *visited){
 	}
 	return index;
 }
-
-City * findClosestCity(Map *map,int *visited,int *distance, City *preOptimal, City *start, int indexOfStart, int visitedIndexCount){
+int* copyPreviousDistance(int *distance, int * visited){
+	int i=0;
+	int *newDistance;
+	for(i=0; i<11; i++){
+		if(visited[i] !=0){
+			newDistance[i] = distance[i];
+		}else{
+			newDistance[i] = INT_MAX;
+		}
+	}
+}
+City * findClosestCity(Map *map,int *visited,int *distance, int *parent, City *start, int indexOfStart, int visitedIndexCount, int sourceWeight){
 	Vector * v = map->cityVector;
 	Data *data = map->cityVector->data;
-
 	int i = 0;
-	for(i=0; i< (v->current_size); i++){
-	}
+
+	//STEP1 : COPY ALL PREVIOUS VALUES OF DISTANCES if only visited
+	distance = copyPreviousDistance(distance, visited);
+
+	//STEP2: FIND ADJACENT NODES
 	List *adjList = data[indexOfStart].city->adjList;
 	int sizeofAdjList = totalCount(adjList);
+
+	//STEP3: UPDATE DISTANCE AND PARENT IF (sourceWeight + WEIGHT TO NODE) < PREVIOUS WEIGHT
 	for (i=2; i <= sizeofAdjList; i++){
 		data = readData(adjList, i);
 		int index =  findIndexOfCityInVector(v, data->city);
-		distance[index] = data->city->edge->weight;
-		*(preOptimal + index) = *start;
+		int EdgeWeight = data->city->edge->weight;
+		if( sourceWeight + EdgeWeight < distance[index]){
+			distance[index] = sourceWeight + EdgeWeight;
+			parent[index] = findIndexOfCityInVector(v, start);
+		}
+		//if(visited[index]==0){	//Dont update distance table at already visited index.
+		//	sourceWeight = sourceWeight + data->city->edge->weight;
+		//	distance[index] = sourceWeight;
+		//	parent[index] = findIndexOfCityInVector(v, start);
+		//}
 	}
-	visited[indexOfStart] = ++visitedIndexCount;
-
+	//STEP4: FIND MINIMUM AMOUNT ALL EDGES | SCAN IN DISTANCE ARRAY
 	int minCityIndex = findMinDistance(distance, visited);
+	visited[minCityIndex] = ++visitedIndexCount;
+
 	return (map->cityVector->data[minCityIndex].city);
 }
 
 List * shortestPath(Map * map, City * start, City * dest){
-	List * listPath = NULL;
+	List * listPath = createList();
 	int max = INT_MAX, vertexCount = 0;
-	//printf("\t%d\n", max);
-
 	vertexCount = map->cityVector->current_size;
-	//printf("\t%d\n", vertexCount);
-	int distance[vertexCount]; //11(0-10)
-	int visited[vertexCount];//11(0-10)
-	int vistedIndexCount=0;
-	//char preOptimal[vertexCount][255]={0};
-	City preOptimal[vertexCount];
-	memset( preOptimal, 0, vertexCount* sizeof(City) );
+	int i=0, distance[vertexCount], visited[vertexCount], visitedIndexCount=0, parent[vertexCount];
 
-	//Initialization
-	int i=0;
 	for(i=0;i<vertexCount; i++){
 		distance[i]=INT_MAX;
 		visited[i]=0;
-		//preOptimal[i]= {0};  char firstName[20]={0}
+		parent[i] = -1;
 	}
+
 	int indexOfStart = findIndexOfCityInVector(map->cityVector, start);
 	int indexOfDest = findIndexOfCityInVector(map->cityVector, dest);
-	int totalDistance = 0;
-	distance[indexOfStart]= 0;
+	int currentStart = indexOfStart;
+	int totalDistance = 0, sourceWeight = 0;
 
-	//setDistance(map->cityVector->data, distance, totalDistance);
+	distance[indexOfStart]= 0;
+	visited[indexOfStart] = ++visitedIndexCount;
+
 	City *city = NULL;
+	Data data;
+	data.city = start;
 	int listIndex=1;
-	for(city = start; city == dest ; ){
-		City *closestCity =  findClosestCity(map, visited, distance, preOptimal, start, indexOfStart, vistedIndexCount);
-		Data data;
+	insertData(listPath, listIndex++, data);
+	city = start;
+	while(city!= dest){
+		City *closestCity =  findClosestCity(map, visited, distance, parent, city, currentStart, visitedIndexCount, sourceWeight);
+		currentStart = findIndexOfCityInVector(map->cityVector, closestCity);
+		sourceWeight = distance[currentStart];
 		data.city = closestCity;
 		insertData(listPath, listIndex++, data);
 		city = closestCity;
 	}
-	return listPath;
+	return listPath;	//TODO: disallocate this!!!!!
 }
 
 
