@@ -193,14 +193,16 @@ struct city * findByNameCity(Vector *v, char *cityName){
 
 void deleteEdge(struct edge *edge){
 	free(edge);
-	edge->city = NULL;
+	//edge->city = NULL;
 	edge = NULL;
 }
 void * deleteCity(City * city){
 	deleteEdge(city->edge);
 	if(city->adjList !=NULL){
 		if(city->adjList->head != NULL)
-			city->adjList = freeList(city->adjList);
+			//city->adjList = freeList(city->adjList);
+			//if(city->adjList !=NULL)
+				deleteList(city->adjList);
 	}
 	free(city);
 	city->adjList = NULL;

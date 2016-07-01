@@ -22,6 +22,7 @@ int main(){
 
 
 	shortestPathList =freeList(shortestPathList);
+	map = deleteMap(map);
 
 	return 0;
 }

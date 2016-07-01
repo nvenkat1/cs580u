@@ -47,7 +47,6 @@ City* findByName(Map * map, char * cityName){
 }
 
 void printMap(Map *map){
-	//printVector(map->cityVector);
 	printAdjList(map->cityVector);
 }
 
