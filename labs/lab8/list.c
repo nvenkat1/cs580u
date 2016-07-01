@@ -313,3 +313,24 @@ void deleteList(List * list){
 	}
 	free(list);
 }
+void printShortestPathList(List *list){
+        if(list ==  NULL) return;
+        if(list->head==NULL){
+                 printf("\tCant print Empty List!!\n\n");
+                return;
+        }
+        Node * node = list->head;
+        //printf("\t[Head]->\n\t");
+        printf("\t[Head]->");
+        int i = 0;
+        while(node!=NULL){
+                //printf("[%s]->", *(node->data->city).name));
+                printf("\n\t\t[name=%-10s]->", node->data->city->name);
+		node = node->next;
+                i++;
+                //if(i%4 == 0){ printf("\n\t"); }
+                //if(i%4 == 0){ printf("\n\t"); }
+        }
+        //printf("\n\t->[Tail]\n");
+        printf("\n\t\t->[Tail]\n\n");
+}

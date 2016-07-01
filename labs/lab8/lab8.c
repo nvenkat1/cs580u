@@ -18,11 +18,7 @@ int main(){
 	City *cityTo = findByName(map, city2);
 	List *shortestPathList = NULL;
 	shortestPathList = shortestPath(map, cityFrom, cityTo);
+	printShortestPathList(shortestPathList);
 
 	return 0;
 }
-	//printf("\n\tCity name found: %s\n\t",  city->name);
-	//printf("\n\tCity name found: %s\n\t",  city->name);
-	//printf("\tcityName= %s has edge to cityName = \n", (*map->cityVector).data[0].city->name);
-	//printf("\tcityName= %d has edge to cityName = \n", (*map->cityVector).data[0].city->adjList->head->data->city->edge->weight);
-	//  (*map->cityVector).data[0].city->adjList->head->next->data->city->name);
